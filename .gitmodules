@@ -1,0 +1,3 @@
+[submodule "Paradox-Platform"]
+	path = Paradox-Platform
+	url = git@github.com:ParadoxGene/Paradox-Platform.git
