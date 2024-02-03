@@ -23,10 +23,10 @@ jobs:
       run: make --makefile="${{github.workspace}}/tests/c/makefile"
       
     - name: C Unit Testing Run
-      run: ./${{github.workspace}}/build/c_unit_tests/unit_tests
+      run: ${{github.workspace}}/build/c_unit_tests/unit_tests
       
     - name: C++ Unit Testing Build
       run: make --makefile="${{github.workspace}}/tests/c++/makefile"
 
     - name: C++ Unit Testing Run
-      run: ./${{github.workspace}}/build/c++_unit_tests/unit_tests
+      run: ${{github.workspace}}/build/c++_unit_tests/unit_tests
