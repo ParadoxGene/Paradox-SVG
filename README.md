@@ -1,7 +1,9 @@
 # Paradox-SVG
-[paradox library] converts scalable vector graphics (svg) content to a modifiable c/c++ or swift object and vice-versa
+Converts scalable vector graphics (svg) content to a modifiable c/c++ or swift object and vice-versa.
 
-![C/C++ Unit Testing](https://github.com/ParadoxGene/Paradox-SVG/actions/workflows/c-c++.yml/badge.svg)
+[![C/C++ Unit Testing](https://github.com/ParadoxGene/Paradox-SVG/actions/workflows/c-c++.yml/badge.svg)](https://github.com/ParadoxGene/Paradox-SVG/actions/workflows/c-c++.yml)
+
+[Community Discord](https://discord.gg/KcVBu4n9TU)
 
 # Prerequisites
 ### Shared libraries (.dll, .so, .dylib):
