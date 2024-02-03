@@ -1,0 +1,29 @@
+name: C/C++ Unit Testing
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: C Unit Testing Build
+      run: make --makefile="${{github.workspace}}/tests/c/makefile"
+      
+    - name: C Unit Testing Run
+      run: ./${{github.workspace}}/build/c_unit_tests/unit_tests
+      
+    - name: C++ Unit Testing Build
+      run: make --makefile="${{github.workspace}}/tests/c++/makefile"
+
+    - name: C++ Unit Testing Run
+      run: ./${{github.workspace}}/build/c++_unit_tests/unit_tests
+
+
+
