@@ -1,9 +1,0 @@
-[submodule "Paradox-Platform"]
-	path = Paradox-Platform
-	url = git@github.com:ParadoxGene/Paradox-Platform.git
-[submodule "googletest"]
-	path = googletest
-	url = https://github.com/google/googletest.git
-[submodule "Unity"]
-	path = Unity
-	url = https://github.com/ThrowTheSwitch/Unity.git

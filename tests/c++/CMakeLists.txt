@@ -5,7 +5,11 @@ project(c++_unit_tests CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_subdirectory(../../googletest googletest)
+set(PROJECT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../..)
+include(${PROJECT_DIR}/cmake/paradox-platform.cmake)
+include(${PROJECT_DIR}/cmake/googletest.cmake)
+
+add_subdirectory(${PROJECT_DIR}/modules/googletest googletest)
 
 enable_testing()
 
