@@ -12,12 +12,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-
-    - name: Download Unity Testing Framework
-      run: git clone https://github.com/ThrowTheSwitch/Unity.git
-
-    - name: Download Googletest Testing Framework
-      run: git clone https://github.com/google/googletest.git
       
     - name: C Unit Testing Build
       run: make --makefile="${{github.workspace}}/tests/c/makefile"
