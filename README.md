@@ -6,13 +6,40 @@ Converts scalable vector graphics (svg) content to a modifiable c/c++ or swift o
 [Community Discord](https://discord.gg/KcVBu4n9TU)
 
 # Prerequisites
-### Shared libraries (.dll, .so, .dylib):
-- C compiler that supports >=C23 standard.
-- C++ compiler that supports >=C++20 standard.
+C compiler that supports C11 standard or higher.
+C++ compiler that supports C++11 standard or higher.
 
-### Unit testing:
-- GNU Make
-- CMake
+# Building the library & Running tests
+To check if the header files are supported on your system.
+
+Build the shared library:
+```
+make
+```
+
+The c framework shared library will be in `build/paradox-svg/c_framework`
+
+The c++ framework shared library will be in `build/paradox-svg/cpp_framework`
+
+Build the tests:
+```
+make build_tests
+```
+
+Running C Tests
+```
+./build/paradox-svg/c_unit_testing/c_unit_tests
+```
+
+Running C++ Tests
+```
+./build/paradox-svg/cpp_unit_testing/cpp_unit_tests
+```
+
+Running Swift Tests
+```
+W.i.P.
+```
 
 # To Do List
 - [ ] Add parsing support for a subset of SVG Version 1.1 Content. ([Standard](https://www.w3.org/TR/SVG11/))
