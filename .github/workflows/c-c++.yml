@@ -13,14 +13,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       
-    - name: C Unit Testing Build
-      run: make --makefile="${{github.workspace}}/tests/c/makefile"
+    - name: C/C++ Unit Testing Build
+      run: make build_tests
       
     - name: C Unit Testing Run
-      run: ${{github.workspace}}/build/c_unit_tests/unit_tests
-      
-    - name: C++ Unit Testing Build
-      run: make --makefile="${{github.workspace}}/tests/c++/makefile"
+      run: ${{github.workspace}}/build/paradox-svg/c_unit_testing/c_unit_tests
 
     - name: C++ Unit Testing Run
-      run: ${{github.workspace}}/build/c++_unit_tests/unit_tests
+      run: ${{github.workspace}}/build/paradox-svg/cpp_unit_testing/cpp_unit_tests
