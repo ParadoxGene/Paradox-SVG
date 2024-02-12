@@ -5,7 +5,7 @@
 
 PARADOX_SVG_API const paradox_errno_t paradox_css_tokenize_file(paradox_cstr_t path);
 
-// Defintion: {ident}
+// Definition: {ident}
 PARADOX_SVG_API const paradox_errno_t paradox_css_tokenize_ident(paradox_css_tracer* tracer);
 
 // Definition: @{ident}
