@@ -3,7 +3,7 @@
 
 
 namespace Paradox { namespace SVG {
-    constexpr DataType::B8 ParseFile(const DataType::String_t& filename)
+    PARADOX_SVG_API const DataType::B8 ParseFile(const DataType::String_t& filename)
     {
         return false;
     }
