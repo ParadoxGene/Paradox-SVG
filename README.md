@@ -42,6 +42,12 @@ W.i.P.
 ```
 
 # To Do List
+- [ ] Add parsing support for a subset of CSS Version 2.1 Content. ([Standard](https://www.w3.org/TR/CSS2/))
+  - **All Parsing Features**
+      - None
+- [ ] Add parsing support for a subset of XML Version 1.1 Content. ([Standard](https://www.w3.org/TR/xml11/))
+  - **All Parsing Features**
+      - None
 - [ ] Add parsing support for a subset of SVG Version 1.1 Content. ([Standard](https://www.w3.org/TR/SVG11/))
   - **All Parsing Features**
     - None
