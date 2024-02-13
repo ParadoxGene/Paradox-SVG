@@ -16,21 +16,23 @@ add_subdirectory("${PROJECT_DIR}/modules/googletest" googletest)
 enable_testing()
 
 add_executable(cpp_unit_tests "${PROJECT_DIR}/tests/cpp/unit_tests.cpp")
+set_target_properties(cpp_unit_tests PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/../paradox-svg-cpp-unit-tests/$<CONFIG>")
 
-target_include_directories(cpp_unit_tests PRIVATE
-    "${PROJECT_DIR}/api/cpp/include"
-    "${PROJECT_DIR}/modules/paradox-platform/api/cpp/include")
-
+target_include_directories(cpp_unit_tests PRIVATE "${PROJECT_DIR}/api/cpp/include" "${PROJECT_DIR}/modules/paradox-platform/api/cpp/include")
 target_link_libraries(cpp_unit_tests PRIVATE paradox-platform-framework paradox-svg-framework GTest::gtest_main)
-
-target_link_directories(cpp_unit_tests PRIVATE
-    "${PROJECT_DIR}/build/paradox-platform/cpp_framework/$<CONFIG>"
-    "${PROJECT_DIR}/build/paradox-svg/cpp_framework/$<CONFIG>")
+target_link_directories(cpp_unit_tests PRIVATE "${PROJECT_DIR}/build/paradox-static/$<CONFIG>")
 
 add_custom_command(TARGET cpp_unit_tests POST_BUILD 
-    COMMAND ${CMAKE_COMMAND} -E copy "${PROJECT_DIR}/tests/assets/example1.svg" "example1.svg"
-    COMMAND ${CMAKE_COMMAND} -E copy "${PROJECT_DIR}/tests/assets/example1.css" "example1.css"
+    COMMAND ${CMAKE_COMMAND} -E copy "${PROJECT_DIR}/tests/assets/example1.svg" "$<TARGET_FILE_DIR:cpp_unit_tests>/example1.svg"
+    COMMAND ${CMAKE_COMMAND} -E copy "${PROJECT_DIR}/tests/assets/example1.css" "$<TARGET_FILE_DIR:cpp_unit_tests>/example1.css"
     COMMENT "Copying assets to bin")
     
+if(WIN32)
+    add_custom_command(TARGET cpp_unit_tests POST_BUILD 
+        COMMAND ${CMAKE_COMMAND} -E copy "${PROJECT_DIR}/build/paradox-shared/$<CONFIG>/paradox-platform-framework.dll" "$<TARGET_FILE_DIR:cpp_unit_tests>/paradox-platform-framework.dll"
+        COMMAND ${CMAKE_COMMAND} -E copy "${PROJECT_DIR}/build/paradox-shared/$<CONFIG>/paradox-svg-framework.dll" "$<TARGET_FILE_DIR:cpp_unit_tests>/paradox-svg-framework.dll"
+        COMMENT "Copying shared libraries to bin")
+endif()
+
 include(GoogleTest)
 gtest_discover_tests(cpp_unit_tests)

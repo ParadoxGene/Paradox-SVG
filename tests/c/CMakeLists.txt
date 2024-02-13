@@ -11,21 +11,24 @@ if(LINUX)
 endif()
 
 include("${PROJECT_DIR}/cmake/unity.cmake")
-add_subdirectory("${PROJECT_DIR}/modules/Unity" unity)
+add_subdirectory("${PROJECT_DIR}/modules/Unity" "./unity")
 
 add_executable(c_unit_tests "${PROJECT_DIR}/tests/c/unit_tests.c")
+set_target_properties(c_unit_tests PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/../paradox-svg-c-unit-tests/$<CONFIG>")
 
-target_include_directories(c_unit_tests PRIVATE
-    "${PROJECT_DIR}/api/c/include"
-    "${PROJECT_DIR}/modules/Paradox-Platform/api/c/include")
-
+target_include_directories(c_unit_tests PRIVATE "${PROJECT_DIR}/api/c/include" "${PROJECT_DIR}/modules/Paradox-Platform/api/c/include")
 target_link_libraries(c_unit_tests PRIVATE paradox-platform paradox-svg unity::framework)
 
-target_link_directories(c_unit_tests PRIVATE
-    "${PROJECT_DIR}/build/paradox-platform/c_framework/$<CONFIG>"
-    "${PROJECT_DIR}/build/paradox-svg/c_framework/$<CONFIG>")
+target_link_directories(c_unit_tests PRIVATE "${PROJECT_DIR}/build/paradox-static/$<CONFIG>")
 
 add_custom_command(TARGET c_unit_tests POST_BUILD 
-    COMMAND ${CMAKE_COMMAND} -E copy "${PROJECT_DIR}/tests/assets/example1.svg" "example1.svg"
-    COMMAND ${CMAKE_COMMAND} -E copy "${PROJECT_DIR}/tests/assets/example1.css" "example1.css"
+    COMMAND ${CMAKE_COMMAND} -E copy "${PROJECT_DIR}/tests/assets/example1.svg" "$<TARGET_FILE_DIR:c_unit_tests>/example1.svg"
+    COMMAND ${CMAKE_COMMAND} -E copy "${PROJECT_DIR}/tests/assets/example1.css" "$<TARGET_FILE_DIR:c_unit_tests>/example1.css"
     COMMENT "Copying assets to bin")
+
+if(WIN32)
+    add_custom_command(TARGET c_unit_tests POST_BUILD 
+        COMMAND ${CMAKE_COMMAND} -E copy "${PROJECT_DIR}/build/paradox-shared/$<CONFIG>/paradox-platform.dll" "$<TARGET_FILE_DIR:c_unit_tests>/paradox-platform.dll"
+        COMMAND ${CMAKE_COMMAND} -E copy "${PROJECT_DIR}/build/paradox-shared/$<CONFIG>/paradox-svg.dll" "$<TARGET_FILE_DIR:c_unit_tests>/paradox-svg.dll"
+        COMMENT "Copying shared libraries to bin")
+endif()

@@ -17,9 +17,8 @@ Build the shared library:
 make
 ```
 
-The c framework shared library will be in `build/paradox-svg/c_framework`
-
-The c++ framework shared library will be in `build/paradox-svg/cpp_framework`
+The shared libraries will be in `build/paradox-shared`
+The static libraries will be in `build/paradox-static`
 
 Build the tests:
 ```
@@ -28,12 +27,12 @@ make build_tests
 
 Running C Tests
 ```
-./build/paradox-svg/c_unit_testing/c_unit_tests
+./build/paradox-svg-c-unit-tests/Debug/c_unit_tests
 ```
 
 Running C++ Tests
 ```
-./build/paradox-svg/cpp_unit_testing/cpp_unit_tests
+./build/paradox-svg-cpp-unit-tests/Debug/cpp_unit_tests
 ```
 
 Running Swift Tests
