@@ -25,10 +25,6 @@ namespace Paradox { namespace CSS {
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseDeclarationList()
-	{
-		return false;
-	}
 	PARADOX_SVG_API const DataType::B8 ParseSelector()
 	{
 		return false;
@@ -73,10 +69,6 @@ namespace Paradox { namespace CSS {
 		return false;
 	}
 	PARADOX_SVG_API const DataType::B8 ParseRuleset(const DataType::String_t& content)
-	{
-		return false;
-	}
-	PARADOX_SVG_API const DataType::B8 ParseDeclarationList(const DataType::String_t& content)
 	{
 		return false;
 	}

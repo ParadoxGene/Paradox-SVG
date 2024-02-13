@@ -34,10 +34,6 @@ PARADOX_SVG_API const paradox_errno_t paradox_css_parse_ruleset(paradox_css_trac
 {
     return 1;
 }
-PARADOX_SVG_API const paradox_errno_t paradox_css_parse_declaration_list(paradox_css_tracer* tracer)
-{
-    return 1;
-}
 PARADOX_SVG_API const paradox_errno_t paradox_css_parse_selector(paradox_css_tracer* tracer)
 {
     return 1;

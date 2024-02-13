@@ -17,15 +17,8 @@ PARADOX_SVG_API const paradox_errno_t paradox_css_parse_at_rule(paradox_css_trac
 // Syntax: '{' S* [ any | block | ATKEYWORD S* | ';' S* ]* '}' S*;
 PARADOX_SVG_API const paradox_errno_t paradox_css_parse_block(paradox_css_tracer* tracer);
 
-// Syntax: selector? '{' S* declaration-list '}' S*;
+// Syntax: selector? '{' S* declaration? [ ';' S* declaration? ]* '}' S*;
 PARADOX_SVG_API const paradox_errno_t paradox_css_parse_ruleset(paradox_css_tracer* tracer);
-
-/** 
- * Syntax1: declaration [ ';' S* declaration-list ]?
- * Syntax2: at-rule declaration-list
- * Syntax3: / * empty * /;
- */
-PARADOX_SVG_API const paradox_errno_t paradox_css_parse_declaration_list(paradox_css_tracer* tracer);
 
 // Syntax: any+;
 PARADOX_SVG_API const paradox_errno_t paradox_css_parse_selector(paradox_css_tracer* tracer);
@@ -35,7 +28,6 @@ PARADOX_SVG_API const paradox_errno_t paradox_css_parse_declaration(paradox_css_
 
 // Syntax: IDENT;
 PARADOX_SVG_API const paradox_errno_t paradox_css_parse_property(paradox_css_tracer* tracer);
-
 
 // Syntax: [ any | block | ATKEYWORD S* ]+;
 PARADOX_SVG_API const paradox_errno_t paradox_css_parse_value(paradox_css_tracer* tracer);

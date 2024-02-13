@@ -159,29 +159,20 @@ namespace Paradox { namespace CSS {
         // Macro: {baduri1}|{baduri2}|{baduri3}
         const DataType::B8 ConsumeBadURIMacro();
 
-        // Macro: {U}{R}{L}\\({w}([!#$%&*-~]|{nonascii}|{escape})*{w}
+        // Macro:url\\({w}([!#$%&*-~]|{nonascii}|{escape})*{w}
         const DataType::B8 ConsumeBadURI1Macro();
 
-        // Macro: {U}{R}{L}\\({w}{string}{w}
+        // Macro: url\\({w}{string}{w}
         const DataType::B8 ConsumeBadURI2Macro();
 
-        // Macro: {U}{R}{L}\\({w}{badstring}
+        // Macro: url\\({w}{badstring}
         const DataType::B8 ConsumeBadURI3Macro();
 
         // Macro: \\n|\\r\\n|\\r|\\f
-        const DataType::B8 ConsumeN1Macro();
+        const DataType::B8 ConsumeNlMacro();
 
         // Macro: [ \\t\\r\\n\\f]*
         const DataType::B8 ConsumeWMacro();
-
-        // Macro: l|\\\\0{0,4}(4c|6c)(\\r\\n|[ \\t\\r\\n\\f])?|\\\\l
-        const DataType::B8 ConsumeLMacro();
-
-        // Macro: r|\\\\0{0,4}(52|72)(\\r\\n|[ \\t\\r\\n\\f])?|\\\\r
-        const DataType::B8 ConsumeRMacro();
-
-        // Macro: u|\\\\0{0,4}(55|75)(\\r\\n|[ \\t\\r\\n\\f])?|\\\\u
-        const DataType::B8 ConsumeUMacro();
 
     public:
         // Definition: {ident}
@@ -334,29 +325,20 @@ namespace Paradox { namespace CSS {
         // Macro: {baduri1}|{baduri2}|{baduri3}
         static const DataType::B8 ConsumeBadURIMacro(const DataType::String_t& content);
 
-        // Macro: {U}{R}{L}\\({w}([!#$%&*-~]|{nonascii}|{escape})*{w}
+        // Macro: url\\({w}([!#$%&*-~]|{nonascii}|{escape})*{w}
         static const DataType::B8 ConsumeBadURI1Macro(const DataType::String_t& content);
 
-        // Macro: {U}{R}{L}\\({w}{string}{w}
+        // Macro: url\\({w}{string}{w}
         static const DataType::B8 ConsumeBadURI2Macro(const DataType::String_t& content);
 
-        // Macro: {U}{R}{L}\\({w}{badstring}
+        // Macro: url\\({w}{badstring}
         static const DataType::B8 ConsumeBadURI3Macro(const DataType::String_t& content);
 
         // Macro: \\n|\\r\\n|\\r|\\f
-        static const DataType::B8 ConsumeN1Macro(const DataType::String_t& content);
+        static const DataType::B8 ConsumeNlMacro(const DataType::String_t& content);
 
         // Macro: [ \\t\\r\\n\\f]*
         static const DataType::B8 ConsumeWMacro(const DataType::String_t& content);
-
-        // Macro: l|\\\\0{0,4}(4c|6c)(\\r\\n|[ \\t\\r\\n\\f])?|\\\\l
-        static const DataType::B8 ConsumeLMacro(const DataType::String_t& content);
-
-        // Macro: r|\\\\0{0,4}(52|72)(\\r\\n|[ \\t\\r\\n\\f])?|\\\\r
-        static const DataType::B8 ConsumeRMacro(const DataType::String_t& content);
-
-        // Macro: u|\\\\0{0,4}(55|75)(\\r\\n|[ \\t\\r\\n\\f])?|\\\\u
-        static const DataType::B8 ConsumeUMacro(const DataType::String_t& content);
 
     private:
         Tracer tracer;

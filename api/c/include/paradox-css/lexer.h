@@ -155,28 +155,19 @@ PARADOX_SVG_API const paradox_errno_t paradox_css_consume_badcomment2_macro(para
 // Macro: {baduri1}|{baduri2}|{baduri3}
 PARADOX_SVG_API const paradox_errno_t paradox_css_consume_baduri_macro(paradox_css_tracer* tracer);
 
-// Macro: {U}{R}{L}\\({w}([!#$%&*-~]|{nonascii}|{escape})*{w}
+// Macro: url\\({w}([!#$%&*-~]|{nonascii}|{escape})*{w}
 PARADOX_SVG_API const paradox_errno_t paradox_css_consume_baduri1_macro(paradox_css_tracer* tracer);
 
-// Macro: {U}{R}{L}\\({w}{string}{w}
+// Macro: url\\({w}{string}{w}
 PARADOX_SVG_API const paradox_errno_t paradox_css_consume_baduri2_macro(paradox_css_tracer* tracer);
 
-// Macro: {U}{R}{L}\\({w}{badstring}
+// Macro: url\\({w}{badstring}
 PARADOX_SVG_API const paradox_errno_t paradox_css_consume_baduri3_macro(paradox_css_tracer* tracer);
 
 // Macro: \\n|\\r\\n|\\r|\\f
-PARADOX_SVG_API const paradox_errno_t paradox_css_consume_n1_macro(paradox_css_tracer* tracer);
+PARADOX_SVG_API const paradox_errno_t paradox_css_consume_nl_macro(paradox_css_tracer* tracer);
 
 // Macro: [ \\t\\r\\n\\f]*
 PARADOX_SVG_API const paradox_errno_t paradox_css_consume_w_macro(paradox_css_tracer* tracer);
-
-// Macro: l|\\\\0{0,4}(4c|6c)(\\r\\n|[ \\t\\r\\n\\f])?|\\\\l
-PARADOX_SVG_API const paradox_errno_t paradox_css_consume_l_macro(paradox_css_tracer* tracer);
-
-// Macro: r|\\\\0{0,4}(52|72)(\\r\\n|[ \\t\\r\\n\\f])?|\\\\r
-PARADOX_SVG_API const paradox_errno_t paradox_css_consume_r_macro(paradox_css_tracer* tracer);
-
-// Macro: u|\\\\0{0,4}(55|75)(\\r\\n|[ \\t\\r\\n\\f])?|\\\\u
-PARADOX_SVG_API const paradox_errno_t paradox_css_consume_u_macro(paradox_css_tracer* tracer);
 
 #endif

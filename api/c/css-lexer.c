@@ -201,23 +201,11 @@ PARADOX_SVG_API const paradox_errno_t paradox_css_consume_baduri3_macro(paradox_
 {
     return 1;
 }
-PARADOX_SVG_API const paradox_errno_t paradox_css_consume_n1_macro(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_errno_t paradox_css_consume_nl_macro(paradox_css_tracer* tracer)
 {
     return 1;
 }
 PARADOX_SVG_API const paradox_errno_t paradox_css_consume_w_macro(paradox_css_tracer* tracer)
-{
-    return 1;
-}
-PARADOX_SVG_API const paradox_errno_t paradox_css_consume_l_macro(paradox_css_tracer* tracer)
-{
-    return 1;
-}
-PARADOX_SVG_API const paradox_errno_t paradox_css_consume_r_macro(paradox_css_tracer* tracer)
-{
-    return 1;
-}
-PARADOX_SVG_API const paradox_errno_t paradox_css_consume_u_macro(paradox_css_tracer* tracer)
 {
     return 1;
 }

@@ -21,15 +21,8 @@ namespace Paradox { namespace CSS {
         // Syntax: '{' S* [ any | block | ATKEYWORD S* | ';' S* ]* '}' S*;
         const DataType::B8 ParseBlock();
 
-        // Syntax: selector? '{' S* declaration-list '}' S*;
+        // Syntax: selector? '{' S* declaration? [ ';' S* declaration? ]* '}' S*;
         const DataType::B8 ParseRuleset();
-
-        /** 
-         * Syntax1: declaration [ ';' S* declaration-list ]?
-         * Syntax2: at-rule declaration-list
-         * Syntax3: / * empty * /;
-         */
-        const DataType::B8 ParseDeclarationList();
 
         // Syntax: any+;
         const DataType::B8 ParseSelector();
@@ -69,15 +62,8 @@ namespace Paradox { namespace CSS {
         // Syntax: '{' S* [ any | block | ATKEYWORD S* | ';' S* ]* '}' S*;
         static const DataType::B8 ParseBlock(const DataType::String_t& content);
 
-        // Syntax: selector? '{' S* declaration-list '}' S*;
+        // Syntax: selector? '{' S* declaration? [ ';' S* declaration? ]* '}' S*;
         static const DataType::B8 ParseRuleset(const DataType::String_t& content);
-
-        /** 
-         * Syntax1: declaration [ ';' S* declaration-list ]?
-         * Syntax2: at-rule declaration-list
-         * Syntax3: / * empty * /;
-         */
-        static const DataType::B8 ParseDeclarationList(const DataType::String_t& content);
 
         // Syntax: any+;
         static const DataType::B8 ParseSelector(const DataType::String_t& content);
@@ -87,7 +73,6 @@ namespace Paradox { namespace CSS {
 
         // Syntax: IDENT;
         static const DataType::B8 ParseProperty(const DataType::String_t& content);
-
 
         // Syntax: [ any | block | ATKEYWORD S* ]+;
         static const DataType::B8 ParseValue(const DataType::String_t& content);

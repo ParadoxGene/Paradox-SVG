@@ -201,23 +201,11 @@ namespace Paradox { namespace CSS {
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ConsumeN1Macro()
+	PARADOX_SVG_API const DataType::B8 ConsumeNlMacro()
 	{
 		return false;
 	}
 	PARADOX_SVG_API const DataType::B8 ConsumeWMacro()
-	{
-		return false;
-	}
-	PARADOX_SVG_API const DataType::B8 ConsumeLMacro()
-	{
-		return false;
-	}
-	PARADOX_SVG_API const DataType::B8 ConsumeRMacro()
-	{
-		return false;
-	}
-	PARADOX_SVG_API const DataType::B8 ConsumeUMacro()
 	{
 		return false;
 	}
@@ -420,23 +408,11 @@ namespace Paradox { namespace CSS {
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ConsumeN1Macro(const DataType::String_t& content)
+	PARADOX_SVG_API const DataType::B8 ConsumeNlMacro(const DataType::String_t& content)
 	{
 		return false;
 	}
 	PARADOX_SVG_API const DataType::B8 ConsumeWMacro(const DataType::String_t& content)
-	{
-		return false;
-	}
-	PARADOX_SVG_API const DataType::B8 ConsumeLMacro(const DataType::String_t& content)
-	{
-		return false;
-	}
-	PARADOX_SVG_API const DataType::B8 ConsumeRMacro(const DataType::String_t& content)
-	{
-		return false;
-	}
-	PARADOX_SVG_API const DataType::B8 ConsumeUMacro(const DataType::String_t& content)
 	{
 		return false;
 	}
