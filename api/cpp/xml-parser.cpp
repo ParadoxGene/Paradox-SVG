@@ -1,650 +1,650 @@
 #include <paradox-xml/parser.hpp>
 
 namespace Paradox { namespace XML {
-    PARADOX_SVG_API const DataType::B8 ParseFileContents(const DataType::String_t& filename)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseFileContents(const DataType::String_t& filename)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseDocument()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseDocument()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseChar()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseChar()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseRestrictedChar()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseRestrictedChar()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseWhitespace()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseWhitespace()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseNameStartChar()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseNameStartChar()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseNameChar()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseNameChar()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseName()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseName()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseNames()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseNames()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseNMToken()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseNMToken()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseNMTokens()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseNMTokens()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEntityValue()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEntityValue()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseAttValue()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseAttValue()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseSystemLiteral()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseSystemLiteral()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParsePubidLiteral()
+    PARADOX_SVG_API const DataType::B8 Parser::ParsePubidLiteral()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParsePubidChar()
+    PARADOX_SVG_API const DataType::B8 Parser::ParsePubidChar()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseCharData()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseCharData()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseComment()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseComment()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParsePI()
+    PARADOX_SVG_API const DataType::B8 Parser::ParsePI()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParsePITarget()
+    PARADOX_SVG_API const DataType::B8 Parser::ParsePITarget()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseCDSect()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseCDSect()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseCDStart()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseCDStart()
     {
         return false;
     }
-     PARADOX_SVG_API const DataType::B8 ParseCData()
+     PARADOX_SVG_API const DataType::B8 Parser::ParseCData()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseCDData()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseCDData()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseProlog()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseProlog()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseXMLDecl()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseXMLDecl()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseVersionInfo()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseVersionInfo()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEq()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEq()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseVersionNum()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseVersionNum()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseMisc()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseMisc()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseDoctypeDecl()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseDoctypeDecl()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseDeclSep()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseDeclSep()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseIntSubset()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseIntSubset()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseMarkupDecl()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseMarkupDecl()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseExtSubset()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseExtSubset()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseExtSubsetDecl()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseExtSubsetDecl()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseSDDecl()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseSDDecl()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseElement()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseElement()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseSTag()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseSTag()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseAttribute()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseAttribute()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseETag()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseETag()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseContent()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseContent()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEmptyElemTag()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEmptyElemTag()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseElementDecl()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseElementDecl()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseContentSpec()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseContentSpec()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseChildren()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseChildren()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseCP()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseCP()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseChoice()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseChoice()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseSeq()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseSeq()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseMixed()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseMixed()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseAttlistDecl()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseAttlistDecl()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseAttDef()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseAttDef()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseAttType()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseAttType()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseStringType()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseStringType()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseTokenizedType()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseTokenizedType()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEnumeratedType()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEnumeratedType()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseNotationType()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseNotationType()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEnumeration()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEnumeration()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseDefaultDecl()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseDefaultDecl()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseConditionalSect()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseConditionalSect()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseIncludeSect()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseIncludeSect()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseIgnoreSect()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseIgnoreSect()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseIgnoreSectContents()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseIgnoreSectContents()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseIgnore()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseIgnore()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseCharRef()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseCharRef()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseReference()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseReference()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEntityRef()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEntityRef()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParsePEReference()
+    PARADOX_SVG_API const DataType::B8 Parser::ParsePEReference()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEntityDecl()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEntityDecl()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseGEDecl()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseGEDecl()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParsePEDecl()
+    PARADOX_SVG_API const DataType::B8 Parser::ParsePEDecl()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEntityDef()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEntityDef()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParsePEDef()
+    PARADOX_SVG_API const DataType::B8 Parser::ParsePEDef()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseExternalID()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseExternalID()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseNDataDecl()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseNDataDecl()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseTextDecl()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseTextDecl()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseExtParsedEnt()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseExtParsedEnt()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEncodingDecl()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEncodingDecl()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEncName()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEncName()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseNotationDecl()
+    PARADOX_SVG_API const DataType::B8 Parser::ParseNotationDecl()
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParsePublicID()
+    PARADOX_SVG_API const DataType::B8 Parser::ParsePublicID()
     {
         return false;
     }
 }}
 
 namespace Paradox { namespace XML {
-    PARADOX_SVG_API const DataType::B8 ParseDocument(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseDocument(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseChar(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseChar(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseRestrictedChar(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseRestrictedChar(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseWhitespace(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseWhitespace(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseNameStartChar(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseNameStartChar(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseNameChar(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseNameChar(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseName(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseName(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseNames(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseNames(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseNMToken(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseNMToken(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseNMTokens(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseNMTokens(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEntityValue(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEntityValue(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseAttValue(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseAttValue(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseSystemLiteral(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseSystemLiteral(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParsePubidLiteral(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParsePubidLiteral(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParsePubidChar(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParsePubidChar(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseCharData(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseCharData(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseComment(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseComment(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParsePI(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParsePI(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParsePITarget(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParsePITarget(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseCDSect(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseCDSect(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseCDStart(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseCDStart(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseCData(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseCData(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseCDData(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseCDData(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseProlog(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseProlog(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseXMLDecl(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseXMLDecl(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseVersionInfo(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseVersionInfo(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEq(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEq(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseVersionNum(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseVersionNum(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseMisc(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseMisc(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseDoctypeDecl(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseDoctypeDecl(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseDeclSep(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseDeclSep(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseIntSubset(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseIntSubset(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseMarkupDecl(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseMarkupDecl(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseExtSubset(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseExtSubset(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseExtSubsetDecl(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseExtSubsetDecl(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseSDDecl(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseSDDecl(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseElement(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseElement(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseSTag(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseSTag(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseAttribute(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseAttribute(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseETag(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseETag(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseContent(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseContent(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEmptyElemTag(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEmptyElemTag(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseElementDecl(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseElementDecl(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseContentSpec(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseContentSpec(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseChildren(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseChildren(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseCP(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseCP(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseChoice(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseChoice(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseSeq(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseSeq(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseMixed(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseMixed(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseAttlistDecl(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseAttlistDecl(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseAttDef(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseAttDef(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseAttType(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseAttType(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseStringType(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseStringType(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseTokenizedType(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseTokenizedType(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEnumeratedType(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEnumeratedType(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseNotationType(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseNotationType(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEnumeration(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEnumeration(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseDefaultDecl(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseDefaultDecl(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseConditionalSect(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseConditionalSect(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseIncludeSect(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseIncludeSect(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseIgnoreSect(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseIgnoreSect(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseIgnoreSectContents(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseIgnoreSectContents(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseIgnore(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseIgnore(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseCharRef(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseCharRef(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseReference(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseReference(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEntityRef(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEntityRef(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParsePEReference(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParsePEReference(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEntityDecl(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEntityDecl(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseGEDecl(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseGEDecl(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParsePEDecl(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParsePEDecl(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEntityDef(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEntityDef(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParsePEDef(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParsePEDef(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseExternalID(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseExternalID(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseNDataDecl(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseNDataDecl(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseTextDecl(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseTextDecl(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseExtParsedEnt(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseExtParsedEnt(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEncodingDecl(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEncodingDecl(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseEncName(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseEncName(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParseNotationDecl(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseNotationDecl(const DataType::String_t& content)
     {
         return false;
     }
-    PARADOX_SVG_API const DataType::B8 ParsePublicID(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParsePublicID(const DataType::String_t& content)
     {
         return false;
     }

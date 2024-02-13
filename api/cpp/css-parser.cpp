@@ -1,98 +1,98 @@
 #include <paradox-css/parser.hpp>
 
 namespace Paradox { namespace CSS {
-    PARADOX_SVG_API const DataType::B8 ParseFile(const DataType::String_t& filename)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseFile(const DataType::String_t& filename)
+	{
+		return lexer.TokenizeFile(filename);
+	}
+	PARADOX_SVG_API const DataType::B8 Parser::ParseStyleSheet()
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseStyleSheet()
+	PARADOX_SVG_API const DataType::B8 Parser::ParseStatement()
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseStatement()
+	PARADOX_SVG_API const DataType::B8 Parser::ParseAtRule()
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseAtRule()
+	PARADOX_SVG_API const DataType::B8 Parser::ParseBlock()
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseBlock()
+	PARADOX_SVG_API const DataType::B8 Parser::ParseRuleset()
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseRuleset()
+	PARADOX_SVG_API const DataType::B8 Parser::ParseSelector()
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseSelector()
+	PARADOX_SVG_API const DataType::B8 Parser::ParseDeclaration()
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseDeclaration()
+	PARADOX_SVG_API const DataType::B8 Parser::ParseProperty()
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseProperty()
+	PARADOX_SVG_API const DataType::B8 Parser::ParseValue()
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseValue()
+	PARADOX_SVG_API const DataType::B8 Parser::ParseAny()
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseAny()
-	{
-		return false;
-	}
-	PARADOX_SVG_API const DataType::B8 ParseUnused()
+	PARADOX_SVG_API const DataType::B8 Parser::ParseUnused()
     {
         return false;
     }
 }}
 
 namespace Paradox { namespace CSS {
-    PARADOX_SVG_API const DataType::B8 ParseStyleSheet(const DataType::String_t& content)
+    PARADOX_SVG_API const DataType::B8 Parser::ParseStyleSheet(const DataType::String_t& content)
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseStatement(const DataType::String_t& content)
+	PARADOX_SVG_API const DataType::B8 Parser::ParseStatement(const DataType::String_t& content)
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseAtRule(const DataType::String_t& content)
+	PARADOX_SVG_API const DataType::B8 Parser::ParseAtRule(const DataType::String_t& content)
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseBlock(const DataType::String_t& content)
+	PARADOX_SVG_API const DataType::B8 Parser::ParseBlock(const DataType::String_t& content)
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseRuleset(const DataType::String_t& content)
+	PARADOX_SVG_API const DataType::B8 Parser::ParseRuleset(const DataType::String_t& content)
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseSelector(const DataType::String_t& content)
+	PARADOX_SVG_API const DataType::B8 Parser::ParseSelector(const DataType::String_t& content)
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseDeclaration(const DataType::String_t& content)
+	PARADOX_SVG_API const DataType::B8 Parser::ParseDeclaration(const DataType::String_t& content)
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseProperty(const DataType::String_t& content)
+	PARADOX_SVG_API const DataType::B8 Parser::ParseProperty(const DataType::String_t& content)
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseValue(const DataType::String_t& content)
+	PARADOX_SVG_API const DataType::B8 Parser::ParseValue(const DataType::String_t& content)
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseAny(const DataType::String_t& content)
+	PARADOX_SVG_API const DataType::B8 Parser::ParseAny(const DataType::String_t& content)
 	{
 		return false;
 	}
-	PARADOX_SVG_API const DataType::B8 ParseUnused(const DataType::String_t& content)
+	PARADOX_SVG_API const DataType::B8 Parser::ParseUnused(const DataType::String_t& content)
     {
         return false;
     }
