@@ -27,4 +27,5 @@ target_link_directories(c_unit_tests PRIVATE
 
 add_custom_command(TARGET c_unit_tests POST_BUILD 
     COMMAND ${CMAKE_COMMAND} -E copy "${PROJECT_DIR}/tests/assets/example1.svg" "example1.svg"
+    COMMAND ${CMAKE_COMMAND} -E copy "${PROJECT_DIR}/tests/assets/example1.css" "example1.css"
     COMMENT "Copying assets to bin")

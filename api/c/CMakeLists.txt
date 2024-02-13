@@ -13,6 +13,9 @@ endif()
 file(GLOB_RECURSE C_SRC **.c)
 
 add_library(paradox-svg SHARED ${C_SRC})
+set_target_properties(paradox-svg
+    PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/../shared-libraries/$<CONFIG>")
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     target_compile_options(paradox-svg PRIVATE -Werror)
