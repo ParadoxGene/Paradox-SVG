@@ -3,6 +3,48 @@
 
 #include <paradox-css/tracer.h>
 
+typedef enum paradox_css_token_type
+{
+    PARADOX_CSS_IDENT_TOK,
+    PARADOX_CSS_ATKEYWORD_TOK,
+    PARADOX_CSS_STRING_TOK,
+    PARADOX_CSS_BAD_STRING_TOK,
+    PARADOX_CSS_BAD_URI_TOK,
+    PARADOX_CSS_BAD_COMMENT_TOK,
+    PARADOX_CSS_HASH_TOK,
+    PARADOX_CSS_NUMBER_TOK,
+    PARADOX_CSS_PERCENTAGE_TOK,
+    PARADOX_CSS_DIMENSION_TOK,
+    PARADOX_CSS_URI_TOK,
+    PARADOX_CSS_UNICODERANGE_TOK,
+    PARADOX_CSS_CDO_TOK,
+    PARADOX_CSS_CDC_TOK,
+    PARADOX_CSS_COLON_TOK,
+    PARADOX_CSS_SEMICOLON_TOK,
+    PARADOX_CSS_OPEN_BRACE_TOK,
+    PARADOX_CSS_CLOSE_BRACE_TOK,
+    PARADOX_CSS_OPEN_PAREN_TOK,
+    PARADOX_CSS_CLOSE_PAREN_TOK,
+    PARADOX_CSS_OPEN_BRACKET_TOK,
+    PARADOX_CSS_CLOSE_BRACKET_TOK,
+    PARADOX_CSS_S_TOK,
+    PARADOX_CSS_COMMENT_TOK,
+    PARADOX_CSS_FUNCTION_TOK,
+    PARADOX_CSS_INCLUDES_TOK,
+    PARADOX_CSS_DASHMATCH_TOK,
+    PARADOX_CSS_DELIM_TOK
+} paradox_css_token_type;
+
+typedef union paradox_css_token_value
+{
+    void* ptr_value;
+} paradox_css_token_value;
+
+typedef struct paradox_css_token {
+    paradox_css_token_type type;
+    paradox_css_token_value value;
+} paradox_css_token;
+
 PARADOX_SVG_API const paradox_errno_t paradox_css_tokenize_file(paradox_cstr_t path);
 
 // Definition: {ident}
