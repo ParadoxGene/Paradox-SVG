@@ -17,7 +17,7 @@ jobs:
       run: make build_tests
       
     - name: C Unit Testing Run
-      run: ${{github.workspace}}/build/paradox-svg/c_unit_testing/c_unit_tests
+      run: ${{github.workspace}}/build/paradox-svg-c-unit-tests/c_unit_tests
 
     - name: C++ Unit Testing Run
-      run: ${{github.workspace}}/build/paradox-svg/cpp_unit_testing/cpp_unit_tests
+      run: ${{github.workspace}}/build/paradox-svg-cpp-unit-tests/cpp_unit_tests
