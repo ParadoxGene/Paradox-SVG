@@ -96,10 +96,54 @@ PARADOX_SVG_API const paradox_errno_t paradox_css_tokenize_unicode_range(paradox
 }
 PARADOX_SVG_API const paradox_errno_t paradox_css_tokenize_cdo(paradox_css_tracer* tracer)
 {
+    size_t index = tracer->index;
+
+    // "<"
+    if(paradox_css_tracer_peek_code(tracer) != 60) goto error;
+    paradox_css_tracer_pop(tracer);
+
+    // "!"
+    if(paradox_css_tracer_peek_code(tracer) != 33) goto error;
+    paradox_css_tracer_pop(tracer);
+
+    // "-"
+    if(paradox_css_tracer_peek_code(tracer) != 45) goto error;
+    paradox_css_tracer_pop(tracer);
+
+    // "-"
+    if(paradox_css_tracer_peek_code(tracer) != 45) goto error;
+    else
+    {
+        paradox_css_tracer_pop(tracer);
+        return 0;
+    }
+
+    error:
+    tracer->index = index;
     return 1;
 }
 PARADOX_SVG_API const paradox_errno_t paradox_css_tokenize_cdc(paradox_css_tracer* tracer)
 {
+    size_t index = tracer->index;
+
+    // "-"
+    if(paradox_css_tracer_peek_code(tracer) != 45) goto error;
+    paradox_css_tracer_pop(tracer);
+
+    // "-"
+    if(paradox_css_tracer_peek_code(tracer) != 45) goto error;
+    paradox_css_tracer_pop(tracer);
+
+    // ">"
+    if(paradox_css_tracer_peek_code(tracer) != 62) goto error;
+    else
+    {
+        paradox_css_tracer_pop(tracer);
+        return 0;
+    }
+
+    error:
+    tracer->index = index;
     return 1;
 }
 PARADOX_SVG_API const paradox_errno_t paradox_css_tokenize_colon(paradox_css_tracer* tracer)
