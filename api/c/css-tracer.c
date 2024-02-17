@@ -1,15 +1,26 @@
 #include <paradox-css/tracer.h>
 #include <stdlib.h>
+#include <string.h>
 
 PARADOX_SVG_API paradox_css_tracer* paradox_css_create_tracer()
 {
     return malloc(sizeof(paradox_css_tracer));
 }
+
 PARADOX_SVG_API void paradox_css_destroy_tracer(paradox_css_tracer* tracer)
 {
     if(!tracer) return;
 
     free(tracer);
+}
+
+PARADOX_SVG_API void paradox_css_tracer_load_str(paradox_css_tracer* tracer, paradox_cstr_t content)
+{
+    if(!tracer) return;
+
+    tracer->content = content;
+    tracer->length = strlen(content);
+    tracer->index = 0;
 }
 
 PARADOX_SVG_API void paradox_css_tracer_pop(paradox_css_tracer* tracer)

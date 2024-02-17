@@ -98,12 +98,10 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_unicode_range(paradox
     // "u"
     if(!paradox_uchar32_lower_eq(117, paradox_css_tracer_peek_code(tracer))) goto error;
     paradox_css_tracer_pop(tracer);
-
+    
     // "+"
     if(paradox_css_tracer_peek_code(tracer) != 43) goto error;
     paradox_css_tracer_pop(tracer);
-
-    printf("WORKS!\n");
 
     error:
     tracer->index = index;
