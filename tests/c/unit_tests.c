@@ -23,7 +23,7 @@ void test_paradox_svg_parse_file(void)
 
 void test_paradox_css_parse_file(void)
 {
-    if(paradox_css_tokenize_file("example1.css") != 0)
+    if(!paradox_css_tokenize_file("example1.css"))
         TEST_FAIL_MESSAGE("Failed to open example1.css");
 }
 
