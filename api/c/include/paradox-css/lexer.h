@@ -83,16 +83,7 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_dimension(paradox_css
  */
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_uri(paradox_css_tracer* tracer);
 
-/**
- * Definition1: u\\+[?]{1,6}
- * Definition2: u\\+[0-9a-f]{1}[?]{0,5}
- * Definition3: u\\+[0-9a-f]{2}[?]{0,4}
- * Definition4: u\\+[0-9a-f]{3}[?]{0,3}
- * Definition5: u\\+[0-9a-f]{4}[?]{0,2}
- * Definition6: u\\+[0-9a-f]{5}[?]{0,1}
- * Definition7: u\\+[0-9a-f]{6}
- * Definition8: u\\+[0-9a-f]{1,6}-[0-9a-f]{1,6}
- */
+// u\\+[0-9a-f?]{1,6}(-[0-9a-f]{1,6})?
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_unicode_range(paradox_css_tracer* tracer);
 
 // Definition: <!--
@@ -119,10 +110,10 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_open_parenthesis(para
 // Definition: \\)
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_close_parenthesis(paradox_css_tracer* tracer);
 
-// Definition: \\[
+/* Definition: \\[ */
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_open_bracket(paradox_css_tracer* tracer);
 
-// Definition: \\]
+/* Definition: \\] */
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_close_bracket(paradox_css_tracer* tracer);
 
 // Definition: [ \\t\\r\\n\\f]+

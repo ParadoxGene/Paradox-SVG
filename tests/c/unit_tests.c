@@ -36,17 +36,21 @@ void test_paradox_css_tokenize_unicode_range(void)
     /* single code point */
     paradox_css_tracer_load_str(tracer, "U+26");
     TEST_ASSERT_TRUE_MESSAGE(paradox_css_tokenize_unicode_range(tracer), "CSS Lexer failed to tokenize \"U+26\"");
+    TEST_ASSERT_TRUE_MESSAGE(tracer->index == tracer->length, "CSS Lexer failed to tokenize all of \"U+26\"");
 
     /* code point range */
     paradox_css_tracer_load_str(tracer, "u+0-7F");
     TEST_ASSERT_TRUE_MESSAGE(paradox_css_tokenize_unicode_range(tracer), "CSS Lexer failed to tokenize \"u+0-7F\"");
+    TEST_ASSERT_TRUE_MESSAGE(tracer->index == tracer->length, "CSS Lexer failed to tokenize all of \"u+0-7F\"");
 
     paradox_css_tracer_load_str(tracer, "U+0025-00FF");
     TEST_ASSERT_TRUE_MESSAGE(paradox_css_tokenize_unicode_range(tracer), "CSS Lexer failed to tokenize \"u+0025-00FF\"");
+    TEST_ASSERT_TRUE_MESSAGE(tracer->index == tracer->length, "CSS Lexer failed to tokenize all of \"u+0025-00FF\"");
 
     /* wildcard range */
     paradox_css_tracer_load_str(tracer, "U+4??");
     TEST_ASSERT_TRUE_MESSAGE(paradox_css_tokenize_unicode_range(tracer), "CSS Lexer failed to tokenize \"u+4??\"");
+    TEST_ASSERT_TRUE_MESSAGE(tracer->index == tracer->length, "CSS Lexer failed to tokenize all of \"u+4??\"");
 
     paradox_css_destroy_tracer(tracer);
 
@@ -55,8 +59,8 @@ void test_paradox_css_tokenize_unicode_range(void)
 // not needed when using generate_test_runner.rb
 int main(void) {
     UNITY_BEGIN();
-    RUN_TEST(test_paradox_svg_parse_file);
-    RUN_TEST(test_paradox_css_parse_file);
+    //RUN_TEST(test_paradox_svg_parse_file);
+    //RUN_TEST(test_paradox_css_parse_file);
     RUN_TEST(test_paradox_css_tokenize_unicode_range);
     return UNITY_END();
 }

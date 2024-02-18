@@ -1,7 +1,6 @@
 #include <paradox-css/lexer.h>
 #include <paradox-platform/io.h>
 #include <paradox-platform/char.h>
-#include <stdlib.h>
 
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_file(paradox_cstr_t path)
 {
@@ -91,40 +90,88 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_uri(paradox_css_trace
 {
     return PARADOX_FALSE;
 }
+
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_unicode_range(paradox_css_tracer* tracer)
 {
+    if(!tracer) return PARADOX_FALSE;
     size_t index = tracer->index;
+    size_t num_bytes;
 
-    // "u"
-    if(!paradox_uchar32_lower_eq(117, paradox_css_tracer_peek_code(tracer))) goto error;
+    // step 1: "u"
+    auto c = paradox_css_tracer_peek_code(tracer, &num_bytes);
+    if(!paradox_uchar32_lower_eq(117, paradox_css_tracer_peek_code(tracer, &num_bytes))) goto error;
     paradox_css_tracer_pop(tracer);
     
-    // "+"
-    if(paradox_css_tracer_peek_code(tracer) != 43) goto error;
+    // step 2: "+"
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '+') goto error;
     paradox_css_tracer_pop(tracer);
 
+    // step 3: [0-9a-f?]{1, 6}
+
+    paradox_cstr_t range_beg_str = NULL;
+    size_t         range_beg_len = 0;
+    for(auto i = 0; i < 6; ++i)
+    {
+        auto c = paradox_css_tracer_peek_code(tracer, &num_bytes);
+        if(paradox_uchar32_ishex(c) || '?' == c)
+        {
+            if(!range_beg_str) range_beg_str = tracer->content + tracer->index;
+            range_beg_len++;
+            paradox_css_tracer_pop(tracer);
+        }
+        else break;
+    }
+
+    if(!range_beg_str) goto error;
+
+    // optional step 4: (-[0-9a-f]{1,6})?
+    // step 4a: "-"
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '-') return PARADOX_TRUE;
+    paradox_css_tracer_pop(tracer);
+
+    // step 4b: [0-9a-f]{1, 6}
+
+    paradox_cstr_t range_end_str = NULL;
+    size_t         range_end_len = 0;
+    for(auto i = 0; i < 6; ++i)
+    {
+        auto c = paradox_css_tracer_peek_code(tracer, &num_bytes);
+        if(paradox_uchar32_ishex(c))
+        {
+            if(!range_end_str) range_end_str = tracer->content + tracer->index;
+            range_end_len++;
+            paradox_css_tracer_pop(tracer);
+        }
+        else break;
+    }
+
+    if(!range_end_str) goto error;
+    else return PARADOX_TRUE;
     error:
     tracer->index = index;
     return PARADOX_FALSE;
 }
+
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_cdo(paradox_css_tracer* tracer)
 {
+    if(!tracer) return PARADOX_FALSE;
     size_t index = tracer->index;
+    size_t num_bytes;
 
     // "<"
-    if(paradox_css_tracer_peek_code(tracer) != 60) goto error;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '<') goto error;
     paradox_css_tracer_pop(tracer);
 
     // "!"
-    if(paradox_css_tracer_peek_code(tracer) != 33) goto error;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '!') goto error;
     paradox_css_tracer_pop(tracer);
 
     // "-"
-    if(paradox_css_tracer_peek_code(tracer) != 45) goto error;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '-') goto error;
     paradox_css_tracer_pop(tracer);
 
     // "-"
-    if(paradox_css_tracer_peek_code(tracer) != 45) goto error;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '-') goto error;
     else
     {
         paradox_css_tracer_pop(tracer);
@@ -137,18 +184,20 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_cdo(paradox_css_trace
 }
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_cdc(paradox_css_tracer* tracer)
 {
+    if(!tracer) return PARADOX_FALSE;
     size_t index = tracer->index;
+    size_t num_bytes;
 
     // "-"
-    if(paradox_css_tracer_peek_code(tracer) != 45) goto error;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '-') goto error;
     paradox_css_tracer_pop(tracer);
 
     // "-"
-    if(paradox_css_tracer_peek_code(tracer) != 45) goto error;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '-') goto error;
     paradox_css_tracer_pop(tracer);
 
     // ">"
-    if(paradox_css_tracer_peek_code(tracer) != 62) goto error;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '>') goto error;
     else
     {
         paradox_css_tracer_pop(tracer);
@@ -161,70 +210,103 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_cdc(paradox_css_trace
 }
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_colon(paradox_css_tracer* tracer)
 {
-    paradox_uint32_t code = paradox_css_tracer_peek_code(tracer);
+    if(!tracer) return PARADOX_FALSE;
+    size_t num_bytes;
 
     // ":"
-    if(code != 58) return PARADOX_FALSE;
-    paradox_css_tracer_pop(tracer);
-    return PARADOX_TRUE;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != ':') return PARADOX_FALSE;
+    else
+    {
+        paradox_css_tracer_pop(tracer);
+        return PARADOX_TRUE;
+    }
 }
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_semicolon(paradox_css_tracer* tracer)
 {
-    paradox_uint32_t code = paradox_css_tracer_peek_code(tracer);
+    if(!tracer) return PARADOX_FALSE;
+    size_t num_bytes;
 
     // ";"
-    if(code != 59) return PARADOX_FALSE;
-    paradox_css_tracer_pop(tracer);
-    return PARADOX_TRUE;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != ';') return PARADOX_FALSE;
+    else
+    {
+        paradox_css_tracer_pop(tracer);
+        return PARADOX_TRUE;
+    }
 }
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_open_brace(paradox_css_tracer* tracer)
 {
-    if(paradox_css_tracer_peek_code(tracer) == 123) // "\{"
+    if(!tracer) return PARADOX_FALSE;
+    size_t num_bytes;
+
+    // "{"
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '{') return PARADOX_FALSE;
+    else
     {
         paradox_css_tracer_pop(tracer);
         return PARADOX_TRUE;
     }
-    else return PARADOX_FALSE;
+
 }
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_close_brace(paradox_css_tracer* tracer)
 {
-    if(paradox_css_tracer_peek_code(tracer) == 125) // "\}"
+    if(!tracer) return PARADOX_FALSE;
+    size_t num_bytes;
+
+    // "}"
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '}') return PARADOX_FALSE;
+    else
     {
         paradox_css_tracer_pop(tracer);
         return PARADOX_TRUE;
     }
-    else return PARADOX_FALSE;
 }
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_open_parenthesis(paradox_css_tracer* tracer)
 {
-    if(paradox_css_tracer_peek_code(tracer) == 40) // "\("
+    if(!tracer) return PARADOX_FALSE;
+    size_t num_bytes;
+
+    // "("
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '(') return PARADOX_FALSE;
+    else
     {
         paradox_css_tracer_pop(tracer);
         return PARADOX_TRUE;
     }
-    else return PARADOX_FALSE;
 }
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_close_parenthesis(paradox_css_tracer* tracer)
 {
-    if(paradox_css_tracer_peek_code(tracer) == 41) // "\)"
+    if(!tracer) return PARADOX_FALSE;
+    size_t num_bytes;
+    
+    // ")"
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != ')') return PARADOX_FALSE;
+    else
     {
         paradox_css_tracer_pop(tracer);
         return PARADOX_TRUE;
     }
-    else return PARADOX_FALSE;
 }
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_open_bracket(paradox_css_tracer* tracer)
 {
-    if(paradox_css_tracer_peek_code(tracer) == 91) // "\["
+    if(!tracer) return PARADOX_FALSE;
+    size_t num_bytes;
+    
+    // "["
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '[') return PARADOX_FALSE;
+    else
     {
         paradox_css_tracer_pop(tracer);
         return PARADOX_TRUE;
     }
-    else return PARADOX_FALSE;
 }
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_close_bracket(paradox_css_tracer* tracer)
 {
-    if(paradox_css_tracer_peek_code(tracer) == 93) // "\]"
+    if(!tracer) return PARADOX_FALSE;
+    size_t num_bytes;
+
+    // "]"
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != ']')
     {
         paradox_css_tracer_pop(tracer);
         return PARADOX_TRUE;
@@ -245,14 +327,16 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_function(paradox_css_
 }
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_includes(paradox_css_tracer* tracer)
 {
+    if(!tracer) return PARADOX_FALSE;
     size_t index = tracer->index;
+    size_t num_bytes;
 
     // "~"
-    if(paradox_css_tracer_peek_code(tracer) != 126) goto error;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '~') goto error;
     paradox_css_tracer_pop(tracer);
 
     // "="
-    if(paradox_css_tracer_peek_code(tracer) != 61) goto error;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '=') goto error;
     else
     {
         paradox_css_tracer_pop(tracer);
@@ -265,14 +349,16 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_includes(paradox_css_
 }
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_dash_match(paradox_css_tracer* tracer)
 {
+    if(!tracer) return PARADOX_FALSE;
     size_t index = tracer->index;
+    size_t num_bytes;
 
     // "|"
-    if(paradox_css_tracer_peek_code(tracer) != 124) goto error;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '|') goto error;
     paradox_css_tracer_pop(tracer);
 
     // "="
-    if(paradox_css_tracer_peek_code(tracer) != 61) goto error;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '=') goto error;
     else
     {
         paradox_css_tracer_pop(tracer);
