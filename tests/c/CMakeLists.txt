@@ -16,6 +16,12 @@ add_subdirectory("${PROJECT_DIR}/modules/Unity" "./unity")
 add_executable(c_unit_tests "${PROJECT_DIR}/tests/c/unit_tests.c")
 set_target_properties(c_unit_tests PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/../paradox-svg-c-unit-tests/$<CONFIG>")
 
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    target_compile_options(c_unit_tests PRIVATE -Werror)
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    target_compile_options(c_unit_tests PRIVATE /WX /wd4996)
+endif()
+
 target_include_directories(c_unit_tests PRIVATE "${PROJECT_DIR}/api/c/include" "${PROJECT_DIR}/modules/Paradox-Platform/api/c/include")
 target_link_libraries(c_unit_tests PRIVATE paradox-platform paradox-svg unity::framework)
 

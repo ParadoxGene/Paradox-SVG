@@ -59,7 +59,7 @@ PARADOX_SVG_API paradox_css_token* paradox_css_create_unicode_range_token(parado
     token->value.unicode_range->start = malloc(sizeof(paradox_char8_t)*(start_len + 1));
     if(!token->value.unicode_range->start) goto free_unicode_range;
 
-    strncpy_s(token->value.unicode_range->start, start_len + 1, start, start_len);
+    strncpy(token->value.unicode_range->start, start, start_len);
     token->value.unicode_range->start[start_len] = '\0';
 
     if(!end)
@@ -71,7 +71,7 @@ PARADOX_SVG_API paradox_css_token* paradox_css_create_unicode_range_token(parado
     token->value.unicode_range->end = malloc(sizeof(paradox_char8_t)*(end_len + 1));
     if(!token->value.unicode_range->end) goto free_range_start;
 
-    strncpy_s(token->value.unicode_range->end, end_len + 1, end, end_len);
+    strncpy(token->value.unicode_range->end, end, end_len);
     token->value.unicode_range->end[end_len] = '\0';
     
     return token;

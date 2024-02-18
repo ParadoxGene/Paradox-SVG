@@ -23,7 +23,7 @@ set_target_properties(paradox-svg PROPERTIES
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     target_compile_options(paradox-svg PRIVATE -Werror)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options(paradox-svg PRIVATE /WX)
+    target_compile_options(paradox-svg PRIVATE /WX /wd4996)
 endif()
 
 target_compile_definitions(paradox-svg PRIVATE PARADOX_SVG_BUILD_DLL)
