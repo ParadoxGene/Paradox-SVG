@@ -12,7 +12,7 @@ PARADOX_SVG_API void paradox_css_destroy_tracer(paradox_css_tracer* tracer)
     free(tracer);
 }
 
-PARADOX_SVG_API void paradox_css_tracer_load_str(paradox_css_tracer* tracer, paradox_cstr_t content)
+PARADOX_SVG_API void paradox_css_tracer_load_str(paradox_css_tracer* tracer, paradox_str_t content)
 {
     if(!tracer) return;
 

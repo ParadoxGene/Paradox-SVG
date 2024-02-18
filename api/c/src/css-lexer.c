@@ -24,7 +24,7 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_file(paradox_cstr_t p
             || paradox_css_tokenize_percentage(tracer)
             || paradox_css_tokenize_dimension(tracer)
             || paradox_css_tokenize_uri(tracer)
-            || paradox_css_tokenize_unicode_range(tracer)
+            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_unicode_range(tracer, &token)
             || paradox_css_tokenize_cdo(tracer, &token)
             || paradox_css_tokenize_cdc(tracer, &token)
             || paradox_css_tokenize_colon(tracer, &token)
@@ -92,64 +92,108 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_uri(paradox_css_trace
     return PARADOX_FALSE;
 }
 
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_unicode_range(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_unicode_range(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    if(!tracer) return PARADOX_FALSE;
+    if(!token) return PARADOX_CSS_LEXER_NO_TOKEN;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_token;
+    }
+    
     size_t index = tracer->index;
     size_t num_bytes;
 
     // step 1: "u"
-    if(!paradox_uchar32_lower_eq(117, paradox_css_tracer_peek_code(tracer, &num_bytes))) goto error;
+    if(!paradox_uchar32_lower_eq(117, paradox_css_tracer_peek_code(tracer, &num_bytes)))
+    {
+        err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+        goto reset_tracer;
+    }
     paradox_css_tracer_pop(tracer);
     
     // step 2: "+"
-    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '+') goto error;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '+')
+    {
+        err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+        goto reset_tracer;
+    }
     paradox_css_tracer_pop(tracer);
 
     // step 3: [0-9a-f?]{1, 6}
 
-    paradox_cstr_t range_beg_str = NULL;
-    size_t         range_beg_len = 0;
+    paradox_str_t  range_start_ptr = NULL;
+    size_t         range_start_len = 0;
     for(paradox_int8_t i = 0; i < 6; ++i)
     {
         paradox_uint32_t c = paradox_css_tracer_peek_code(tracer, &num_bytes);
         if(paradox_uchar32_ishex(c) || '?' == c)
         {
-            if(!range_beg_str) range_beg_str = tracer->content + tracer->index;
-            range_beg_len++;
+            if(!range_start_ptr) range_start_ptr = tracer->content + tracer->index;
+            range_start_len++;
             paradox_css_tracer_pop(tracer);
         }
         else break;
     }
-
-    if(!range_beg_str) goto error;
+    if(!range_start_ptr)
+    {
+        err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+        goto reset_tracer;
+    }
 
     // optional step 4: (-[0-9a-f]{1,6})?
     // step 4a: "-"
-    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '-') return PARADOX_TRUE;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '-')
+    {
+        *token = paradox_css_create_unicode_range_token(range_start_ptr, range_start_len, NULL, 0);
+        
+        if(*token == NULL)
+        {
+            err = PARADOX_CSS_LEXER_TOKEN_ALLOC_FAILURE;
+            goto reset_tracer;
+        }
+        else return PARADOX_CSS_LEXER_SUCCESS;
+    }
     paradox_css_tracer_pop(tracer);
 
     // step 4b: [0-9a-f]{1, 6}
 
-    paradox_cstr_t range_end_str = NULL;
+    paradox_str_t  range_end_ptr = NULL;
     size_t         range_end_len = 0;
     for(paradox_int8_t i = 0; i < 6; ++i)
     {
         paradox_uint32_t c = paradox_css_tracer_peek_code(tracer, &num_bytes);
         if(paradox_uchar32_ishex(c))
         {
-            if(!range_end_str) range_end_str = tracer->content + tracer->index;
+            if(!range_end_ptr) range_end_ptr = tracer->content + tracer->index;
             range_end_len++;
             paradox_css_tracer_pop(tracer);
         }
         else break;
     }
+    if(!range_end_ptr)
+    {
+        err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+        goto reset_tracer;
+    }
+    
+    *token = paradox_css_create_unicode_range_token(range_start_ptr, range_start_len, range_end_ptr, range_end_len);
+    if(*token == NULL)
+    {
+        err = PARADOX_CSS_LEXER_TOKEN_ALLOC_FAILURE;
+        goto reset_tracer;
+    }
+    else return PARADOX_CSS_LEXER_SUCCESS;
 
-    if(!range_end_str) goto error;
-    else return PARADOX_TRUE;
-    error:
+    reset_tracer:
     tracer->index = index;
-    return PARADOX_FALSE;
+
+    null_token:
+    *token = NULL;
+
+    return err;
 }
 
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_cdo(paradox_css_tracer* tracer, paradox_css_token** token)

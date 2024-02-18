@@ -1,5 +1,6 @@
 #include <paradox-css/token.h>
 #include <stdlib.h>
+#include <string.h>
 
 PARADOX_SVG_API paradox_css_token* paradox_css_create_ident_token()
 {
@@ -47,6 +48,43 @@ PARADOX_SVG_API paradox_css_token* paradox_css_create_uri_token()
 }
 PARADOX_SVG_API paradox_css_token* paradox_css_create_unicode_range_token(paradox_cstr_t start, size_t start_len, paradox_cstr_t end, size_t end_len)
 {
+    paradox_css_token* token = malloc(sizeof(paradox_css_token));
+    if(!token || !start) return NULL;
+    token->type = PARADOX_CSS_UNICODERANGE_TOK;
+    token->next_token = NULL;
+
+    token->value.unicode_range = malloc(sizeof(paradox_css_unicode_range));
+    if(!token->value.unicode_range) goto free_token;
+
+    token->value.unicode_range->start = malloc(sizeof(paradox_char8_t)*(start_len + 1));
+    if(!token->value.unicode_range->start) goto free_unicode_range;
+
+    strncpy_s(token->value.unicode_range->start, start_len + 1, start, start_len);
+    token->value.unicode_range->start[start_len] = '\0';
+
+    if(!end)
+    {
+        token->value.unicode_range->end = NULL;
+        return token;
+    }
+
+    token->value.unicode_range->end = malloc(sizeof(paradox_char8_t)*(end_len + 1));
+    if(!token->value.unicode_range->end) goto free_range_start;
+
+    strncpy_s(token->value.unicode_range->end, end_len + 1, end, end_len);
+    token->value.unicode_range->end[end_len] = '\0';
+    
+    return token;
+
+    free_range_start:
+    free(token->value.unicode_range->start);
+
+    free_unicode_range:
+    free(token->value.unicode_range);
+
+    free_token:
+    free(token);
+    
 	return NULL;
 }
 PARADOX_SVG_API paradox_css_token* paradox_css_create_cdo_token()
@@ -157,13 +195,20 @@ PARADOX_SVG_API void paradox_css_destroy_token(paradox_css_token* token)
     if(!token) return;
     paradox_css_destroy_token(token->next_token);
 
-    switch(token->type) {
-    case PARADOX_CSS_UNICODERANGE_TOK:
-        free(token->value.unicode_range->start);
-        free(token->value.unicode_range->end);
+    switch(token->type)
+    {
+    case PARADOX_CSS_UNICODERANGE_TOK: {
+        if(token->value.unicode_range)
+        {
+            if(token->value.unicode_range->start) free(token->value.unicode_range->start);
+            if(token->value.unicode_range->end) free(token->value.unicode_range->end);
+            free(token->value.unicode_range);
+        }
         break;
-    default: break; }
+    }
+    default: {
+        break; 
+    }}
 
     free(token);
-	return;
 }

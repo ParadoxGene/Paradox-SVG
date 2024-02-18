@@ -4,6 +4,24 @@
 #include <paradox-css/tracer.h>
 #include <paradox-css/token.h>
 
+typedef enum paradox_css_lexer_errno_t
+{
+    /** Lexer successfully tokenized a step. */
+    PARADOX_CSS_LEXER_SUCCESS,
+
+    /** Lexer function was not passed a tracer reference. */
+    PARADOX_CSS_LEXER_NO_TRACER,
+
+    /** Lexer function was not passed a token reference. */
+    PARADOX_CSS_LEXER_NO_TOKEN,
+
+    /** String content of the tracer is invalid for the lexer function. */
+    PARADOX_CSS_LEXER_INVALID_CONTENT,
+
+    /** Lexer function failed to allocate the token. */
+    PARADOX_CSS_LEXER_TOKEN_ALLOC_FAILURE,
+} paradox_css_lexer_errno_t;
+
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_file(paradox_cstr_t path);
 
 // Definition: {ident}
@@ -43,7 +61,7 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_dimension(paradox_css
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_uri(paradox_css_tracer* tracer);
 
 // u\\+[0-9a-f?]{1,6}(-[0-9a-f]{1,6})?
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_unicode_range(paradox_css_tracer* tracer);
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_unicode_range(paradox_css_tracer* tracer, paradox_css_token** token);
 
 /* Definition: <!-- */
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_cdo(paradox_css_tracer* tracer, paradox_css_token** token);

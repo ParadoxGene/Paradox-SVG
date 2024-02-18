@@ -6,13 +6,13 @@
 typedef struct paradox_css_tracer 
 {
     size_t index, length;
-    paradox_cstr_t content;
+    paradox_str_t content;
 } paradox_css_tracer;
 
 PARADOX_SVG_API paradox_css_tracer* paradox_css_create_tracer();
 PARADOX_SVG_API void paradox_css_destroy_tracer(paradox_css_tracer* tracer);
 
-PARADOX_SVG_API void paradox_css_tracer_load_str(paradox_css_tracer* tracer, paradox_cstr_t content);
+PARADOX_SVG_API void paradox_css_tracer_load_str(paradox_css_tracer* tracer, paradox_str_t content);
 
 PARADOX_SVG_API void paradox_css_tracer_pop(paradox_css_tracer* tracer);
 PARADOX_SVG_API void paradox_css_tracer_pop_seq(paradox_css_tracer* tracer, size_t len);
