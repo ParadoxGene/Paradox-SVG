@@ -2,48 +2,7 @@
 #define PARADOX_WORKS_C_CSS_LEXER_H
 
 #include <paradox-css/tracer.h>
-
-typedef enum paradox_css_token_type
-{
-    PARADOX_CSS_IDENT_TOK,
-    PARADOX_CSS_ATKEYWORD_TOK,
-    PARADOX_CSS_STRING_TOK,
-    PARADOX_CSS_BAD_STRING_TOK,
-    PARADOX_CSS_BAD_URI_TOK,
-    PARADOX_CSS_BAD_COMMENT_TOK,
-    PARADOX_CSS_HASH_TOK,
-    PARADOX_CSS_NUMBER_TOK,
-    PARADOX_CSS_PERCENTAGE_TOK,
-    PARADOX_CSS_DIMENSION_TOK,
-    PARADOX_CSS_URI_TOK,
-    PARADOX_CSS_UNICODERANGE_TOK,
-    PARADOX_CSS_CDO_TOK,
-    PARADOX_CSS_CDC_TOK,
-    PARADOX_CSS_COLON_TOK,
-    PARADOX_CSS_SEMICOLON_TOK,
-    PARADOX_CSS_OPEN_BRACE_TOK,
-    PARADOX_CSS_CLOSE_BRACE_TOK,
-    PARADOX_CSS_OPEN_PAREN_TOK,
-    PARADOX_CSS_CLOSE_PAREN_TOK,
-    PARADOX_CSS_OPEN_BRACKET_TOK,
-    PARADOX_CSS_CLOSE_BRACKET_TOK,
-    PARADOX_CSS_S_TOK,
-    PARADOX_CSS_COMMENT_TOK,
-    PARADOX_CSS_FUNCTION_TOK,
-    PARADOX_CSS_INCLUDES_TOK,
-    PARADOX_CSS_DASHMATCH_TOK,
-    PARADOX_CSS_DELIM_TOK
-} paradox_css_token_type;
-
-typedef union paradox_css_token_value
-{
-    void* ptr_value;
-} paradox_css_token_value;
-
-typedef struct paradox_css_token {
-    paradox_css_token_type type;
-    paradox_css_token_value value;
-} paradox_css_token;
+#include <paradox-css/token.h>
 
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_file(paradox_cstr_t path);
 
@@ -86,35 +45,35 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_uri(paradox_css_trace
 // u\\+[0-9a-f?]{1,6}(-[0-9a-f]{1,6})?
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_unicode_range(paradox_css_tracer* tracer);
 
-// Definition: <!--
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_cdo(paradox_css_tracer* tracer);
+/* Definition: <!-- */
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_cdo(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: -->
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_cdc(paradox_css_tracer* tracer);
+/* Definition: --> */
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_cdc(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: :
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_colon(paradox_css_tracer* tracer);
+/* Definition: : */
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_colon(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: ;
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_semicolon(paradox_css_tracer* tracer);
+/* Definition: ; */
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_semicolon(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: \\{
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_open_brace(paradox_css_tracer* tracer);
+/* Definition: \\{ */
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_open_brace(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: \\}
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_close_brace(paradox_css_tracer* tracer);
+/* Definition: \\} */
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_close_brace(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: \\(
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_open_parenthesis(paradox_css_tracer* tracer);
+/* Definition: \\( */
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_open_parenthesis(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: \\)
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_close_parenthesis(paradox_css_tracer* tracer);
+/* Definition: \\) */
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_close_parenthesis(paradox_css_tracer* tracer, paradox_css_token** token);
 
 /* Definition: \\[ */
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_open_bracket(paradox_css_tracer* tracer);
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_open_bracket(paradox_css_tracer* tracer, paradox_css_token** token);
 
 /* Definition: \\] */
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_close_bracket(paradox_css_tracer* tracer);
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_close_bracket(paradox_css_tracer* tracer, paradox_css_token** token);
 
 // Definition: [ \\t\\r\\n\\f]+
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_s(paradox_css_tracer* tracer);
@@ -125,11 +84,11 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_comment(paradox_css_t
 // Definition: {ident}\\(
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_function(paradox_css_tracer* tracer);
 
-// Definition: ~=
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_includes(paradox_css_tracer* tracer);
+/* Definition: ~= */
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_includes(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: |=
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_dash_match(paradox_css_tracer* tracer);
+/* Definition: |= */
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_dash_match(paradox_css_tracer* tracer, paradox_css_token** token);
 
 // Definition: Any other character not matched by the above rules, and neither a single nor a double quote
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_delim(paradox_css_tracer* tracer);

@@ -11,6 +11,7 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_file(paradox_cstr_t p
 
     while(tracer->index <= tracer->length)
     {
+        paradox_css_token* token;
         paradox_bool8_t token_found =
             paradox_css_tokenize_ident(tracer)
             || paradox_css_tokenize_atkeyword(tracer)
@@ -24,21 +25,21 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_file(paradox_cstr_t p
             || paradox_css_tokenize_dimension(tracer)
             || paradox_css_tokenize_uri(tracer)
             || paradox_css_tokenize_unicode_range(tracer)
-            || paradox_css_tokenize_cdo(tracer)
-            || paradox_css_tokenize_cdc(tracer)
-            || paradox_css_tokenize_colon(tracer)
-            || paradox_css_tokenize_semicolon(tracer)
-            || paradox_css_tokenize_open_brace(tracer)
-            || paradox_css_tokenize_close_brace(tracer)
-            || paradox_css_tokenize_open_parenthesis(tracer)
-            || paradox_css_tokenize_close_parenthesis(tracer)
-            || paradox_css_tokenize_open_bracket(tracer)
-            || paradox_css_tokenize_close_bracket(tracer)
+            || paradox_css_tokenize_cdo(tracer, &token)
+            || paradox_css_tokenize_cdc(tracer, &token)
+            || paradox_css_tokenize_colon(tracer, &token)
+            || paradox_css_tokenize_semicolon(tracer, &token)
+            || paradox_css_tokenize_open_brace(tracer, &token)
+            || paradox_css_tokenize_close_brace(tracer, &token)
+            || paradox_css_tokenize_open_parenthesis(tracer, &token)
+            || paradox_css_tokenize_close_parenthesis(tracer, &token)
+            || paradox_css_tokenize_open_bracket(tracer, &token)
+            || paradox_css_tokenize_close_bracket(tracer, &token)
             || paradox_css_tokenize_s(tracer)
             || paradox_css_tokenize_comment(tracer)
             || paradox_css_tokenize_function(tracer)
-            || paradox_css_tokenize_includes(tracer)
-            || paradox_css_tokenize_dash_match(tracer)
+            || paradox_css_tokenize_includes(tracer, &token)
+            || paradox_css_tokenize_dash_match(tracer, &token)
             || paradox_css_tokenize_delim(tracer);
         paradox_css_tracer_pop(tracer);
     }
@@ -151,9 +152,9 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_unicode_range(paradox
     return PARADOX_FALSE;
 }
 
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_cdo(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_cdo(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    if(!tracer) return PARADOX_FALSE;
+    if(!tracer) goto null_token;
     size_t index = tracer->index;
     size_t num_bytes;
 
@@ -174,16 +175,20 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_cdo(paradox_css_trace
     else
     {
         paradox_css_tracer_pop(tracer);
+        if(token) *token = paradox_css_create_cdo_token();
         return PARADOX_TRUE;
     }
 
     error:
     tracer->index = index;
+
+    null_token:
+    if(token) *token = NULL;
     return PARADOX_FALSE;
 }
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_cdc(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_cdc(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    if(!tracer) return PARADOX_FALSE;
+    if(!tracer) goto null_token;
     size_t index = tracer->index;
     size_t num_bytes;
 
@@ -200,117 +205,160 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_cdc(paradox_css_trace
     else
     {
         paradox_css_tracer_pop(tracer);
+        if(token) *token = paradox_css_create_cdc_token();
         return PARADOX_TRUE;
     }
 
     error:
     tracer->index = index;
+
+    null_token:
+    if(token) *token = NULL;
     return PARADOX_FALSE;
 }
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_colon(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_colon(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    if(!tracer) return PARADOX_FALSE;
+    if(!tracer) goto null_token;
     size_t num_bytes;
 
     // ":"
-    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != ':') return PARADOX_FALSE;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != ':') goto null_token;
     else
     {
         paradox_css_tracer_pop(tracer);
+        if(token) *token = paradox_css_create_colon_token();
         return PARADOX_TRUE;
     }
+
+    null_token:
+    if(token) *token = NULL;
+    return PARADOX_FALSE;
 }
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_semicolon(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_semicolon(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    if(!tracer) return PARADOX_FALSE;
+    if(!tracer) goto null_token;
     size_t num_bytes;
 
     // ";"
-    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != ';') return PARADOX_FALSE;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != ';') goto null_token;
     else
     {
         paradox_css_tracer_pop(tracer);
+        if(token) *token = paradox_css_create_semicolon_token();
         return PARADOX_TRUE;
     }
+
+    null_token:
+    if(token) *token = NULL;
+    return PARADOX_FALSE;
 }
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_open_brace(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_open_brace(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    if(!tracer) return PARADOX_FALSE;
+    if(!tracer) goto null_token;
     size_t num_bytes;
 
     // "{"
-    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '{') return PARADOX_FALSE;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '{') goto null_token;
     else
     {
         paradox_css_tracer_pop(tracer);
+        if(token) *token = paradox_css_create_open_brace_token();
         return PARADOX_TRUE;
     }
 
+    null_token:
+    if(token) *token = NULL;
+    return PARADOX_FALSE;
 }
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_close_brace(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_close_brace(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    if(!tracer) return PARADOX_FALSE;
+    if(!tracer) goto null_token;
     size_t num_bytes;
 
     // "}"
-    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '}') return PARADOX_FALSE;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '}') goto null_token;
     else
     {
         paradox_css_tracer_pop(tracer);
+        if(token) *token = paradox_css_create_close_brace_token();
         return PARADOX_TRUE;
     }
+
+    null_token:
+    if(token) *token = NULL;
+    return PARADOX_FALSE;
 }
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_open_parenthesis(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_open_parenthesis(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    if(!tracer) return PARADOX_FALSE;
+    if(!tracer) goto null_token;
     size_t num_bytes;
 
     // "("
-    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '(') return PARADOX_FALSE;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '(') goto null_token;
     else
     {
         paradox_css_tracer_pop(tracer);
+        if(token) *token = paradox_css_create_open_paren_token();
         return PARADOX_TRUE;
     }
+
+    null_token:
+    if(token) *token = NULL;
+    return PARADOX_FALSE;
 }
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_close_parenthesis(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_close_parenthesis(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    if(!tracer) return PARADOX_FALSE;
+    if(!tracer) goto null_token;
     size_t num_bytes;
     
     // ")"
-    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != ')') return PARADOX_FALSE;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != ')') goto null_token;
     else
     {
         paradox_css_tracer_pop(tracer);
+        if(token) *token = paradox_css_create_close_paren_token();
         return PARADOX_TRUE;
     }
+
+    null_token:
+    if(token) *token = NULL;
+    return PARADOX_FALSE;
 }
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_open_bracket(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_open_bracket(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    if(!tracer) return PARADOX_FALSE;
+    if(!tracer) goto null_token;
     size_t num_bytes;
     
     // "["
-    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '[') return PARADOX_FALSE;
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '[') goto null_token;
     else
     {
         paradox_css_tracer_pop(tracer);
+        if(token) *token = paradox_css_create_open_bracket_token();
         return PARADOX_TRUE;
     }
+
+    null_token:
+    if(token) *token = NULL;
+    return PARADOX_FALSE;
 }
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_close_bracket(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_close_bracket(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    if(!tracer) return PARADOX_FALSE;
+    if(!tracer) goto null_token;
     size_t num_bytes;
 
     // "]"
-    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != ']')
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != ']') goto null_token;
+    else
     {
         paradox_css_tracer_pop(tracer);
+        if(token) *token = paradox_css_create_close_bracket_token();
         return PARADOX_TRUE;
     }
-    else return PARADOX_FALSE;
+    
+    null_token:
+    if(token) *token = NULL;
+    return PARADOX_FALSE;
 }
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_s(paradox_css_tracer* tracer)
 {
@@ -324,9 +372,9 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_function(paradox_css_
 {
     return PARADOX_FALSE;
 }
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_includes(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_includes(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    if(!tracer) return PARADOX_FALSE;
+    if(!tracer) goto null_token;
     size_t index = tracer->index;
     size_t num_bytes;
 
@@ -339,16 +387,20 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_includes(paradox_css_
     else
     {
         paradox_css_tracer_pop(tracer);
+        if(token) *token = paradox_css_create_includes_token();
         return PARADOX_TRUE;
     }
 
     error:
     tracer->index = index;
+
+    null_token:
+    if(token) *token = NULL;
     return PARADOX_FALSE;
 }
-PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_dash_match(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_dash_match(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    if(!tracer) return PARADOX_FALSE;
+    if(!tracer) goto null_token;
     size_t index = tracer->index;
     size_t num_bytes;
 
@@ -361,11 +413,15 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_dash_match(paradox_cs
     else
     {
         paradox_css_tracer_pop(tracer);
+        if(token) *token = paradox_css_create_dashmatch_token();
         return PARADOX_TRUE;
     }
 
     error:
     tracer->index = index;
+
+    null_token:
+    if(token) *token = NULL;
     return PARADOX_FALSE;
 }
 PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_delim(paradox_css_tracer* tracer)
