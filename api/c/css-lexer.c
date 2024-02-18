@@ -98,7 +98,6 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_unicode_range(paradox
     size_t num_bytes;
 
     // step 1: "u"
-    auto c = paradox_css_tracer_peek_code(tracer, &num_bytes);
     if(!paradox_uchar32_lower_eq(117, paradox_css_tracer_peek_code(tracer, &num_bytes))) goto error;
     paradox_css_tracer_pop(tracer);
     
@@ -110,9 +109,9 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_unicode_range(paradox
 
     paradox_cstr_t range_beg_str = NULL;
     size_t         range_beg_len = 0;
-    for(auto i = 0; i < 6; ++i)
+    for(paradox_int8_t i = 0; i < 6; ++i)
     {
-        auto c = paradox_css_tracer_peek_code(tracer, &num_bytes);
+        paradox_uint32_t c = paradox_css_tracer_peek_code(tracer, &num_bytes);
         if(paradox_uchar32_ishex(c) || '?' == c)
         {
             if(!range_beg_str) range_beg_str = tracer->content + tracer->index;
@@ -133,9 +132,9 @@ PARADOX_SVG_API const paradox_bool8_t paradox_css_tokenize_unicode_range(paradox
 
     paradox_cstr_t range_end_str = NULL;
     size_t         range_end_len = 0;
-    for(auto i = 0; i < 6; ++i)
+    for(paradox_int8_t i = 0; i < 6; ++i)
     {
-        auto c = paradox_css_tracer_peek_code(tracer, &num_bytes);
+        paradox_uint32_t c = paradox_css_tracer_peek_code(tracer, &num_bytes);
         if(paradox_uchar32_ishex(c))
         {
             if(!range_end_str) range_end_str = tracer->content + tracer->index;
