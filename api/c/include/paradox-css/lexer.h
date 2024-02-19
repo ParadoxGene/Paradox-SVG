@@ -93,8 +93,8 @@ PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_open_bracke
 /* Definition: \\] */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_close_bracket(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: [ \\t\\r\\n\\f]+
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_s(paradox_css_tracer* tracer);
+/* Definition: [ \\t\\r\\n\\f]+ */
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_s(paradox_css_tracer* tracer, paradox_css_token** token);
 
 // Definition: \\/\\*[^*]*\\*+([^/*][^*]*\\*+)*\\/
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_comment(paradox_css_tracer* tracer);
