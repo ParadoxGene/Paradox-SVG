@@ -1,6 +1,7 @@
 #include <paradox-css/lexer.h>
 #include <paradox-platform/io.h>
 #include <paradox-platform/char.h>
+#include <paradox-platform/conv.h>
 
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_file(paradox_cstr_t path)
 {
@@ -13,17 +14,17 @@ PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_file(parado
     {
         paradox_css_token* token;
         paradox_bool8_t token_found =
-            PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_ident(tracer)
-            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_atkeyword(tracer)
-            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_string(tracer)
-            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_bad_string(tracer)
-            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_bad_uri(tracer)
-            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_bad_comment(tracer)
-            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_hash(tracer)
-            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_number(tracer)
-            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_percentage(tracer)
-            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_dimension(tracer)
-            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_uri(tracer)
+            PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_ident(tracer, &token)
+            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_atkeyword(tracer, &token)
+            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_string(tracer, &token)
+            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_bad_string(tracer, &token)
+            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_bad_uri(tracer, &token)
+            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_bad_comment(tracer, &token)
+            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_hash(tracer, &token)
+            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_number(tracer, &token)
+            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_percentage(tracer, &token)
+            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_dimension(tracer, &token)
+            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_uri(tracer, &token)
             || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_unicode_range(tracer, &token)
             || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_cdo(tracer, &token)
             || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_cdc(tracer, &token)
@@ -36,60 +37,302 @@ PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_file(parado
             || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_open_bracket(tracer, &token)
             || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_close_bracket(tracer, &token)
             || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_s(tracer, &token)
-            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_comment(tracer)
-            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_function(tracer)
+            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_comment(tracer, &token)
+            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_function(tracer, &token)
             || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_includes(tracer, &token)
             || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_dash_match(tracer, &token)
-            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_delim(tracer);
+            || PARADOX_CSS_LEXER_SUCCESS == paradox_css_tokenize_delim(tracer, &token);
         paradox_css_tracer_pop(tracer);
     }
 
     paradox_css_destroy_tracer(tracer);
     return PARADOX_CSS_LEXER_INVALID_CONTENT;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_ident(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_ident(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!token) return PARADOX_CSS_LEXER_NO_TOKEN;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_token;
+    }
+
+/*
+    size_t index = tracer->index;
+    size_t num_bytes;
+    
+    // TODO
+    err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+
+    reset_tracer:
+    tracer->index = index;
+*/
+
+    null_token:
+    *token = NULL;
+    return err;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_atkeyword(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_atkeyword(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!token) return PARADOX_CSS_LEXER_NO_TOKEN;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_token;
+    }
+
+/*
+    size_t index = tracer->index;
+    size_t num_bytes;
+    
+    // TODO
+    err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+
+    reset_tracer:
+    tracer->index = index;
+*/
+
+    null_token:
+    *token = NULL;
+    return err;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_string(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_string(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!token) return PARADOX_CSS_LEXER_NO_TOKEN;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_token;
+    }
+
+/*
+    size_t index = tracer->index;
+    size_t num_bytes;
+    
+    // TODO
+    err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+
+    reset_tracer:
+    tracer->index = index;
+*/
+
+    null_token:
+    *token = NULL;
+    return err;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_bad_string(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_bad_string(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!token) return PARADOX_CSS_LEXER_NO_TOKEN;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_token;
+    }
+
+/*
+    size_t index = tracer->index;
+    size_t num_bytes;
+    
+    // TODO
+    err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+
+    reset_tracer:
+    tracer->index = index;
+*/
+
+    null_token:
+    *token = NULL;
+    return err;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_bad_uri(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_bad_uri(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!token) return PARADOX_CSS_LEXER_NO_TOKEN;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_token;
+    }
+
+/*
+    size_t index = tracer->index;
+    size_t num_bytes;
+    
+    // TODO
+    err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+
+    reset_tracer:
+    tracer->index = index;
+*/
+
+    null_token:
+    *token = NULL;
+    return err;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_bad_comment(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_bad_comment(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!token) return PARADOX_CSS_LEXER_NO_TOKEN;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_token;
+    }
+
+/*
+    size_t index = tracer->index;
+    size_t num_bytes;
+    
+    // TODO
+    err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+
+    reset_tracer:
+    tracer->index = index;
+*/
+
+    null_token:
+    *token = NULL;
+    return err;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_hash(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_hash(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!token) return PARADOX_CSS_LEXER_NO_TOKEN;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_token;
+    }
+
+/*
+    size_t index = tracer->index;
+    size_t num_bytes;
+    
+    // TODO
+    err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+
+    reset_tracer:
+    tracer->index = index;
+*/
+
+    null_token:
+    *token = NULL;
+    return err;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_number(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_number(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!token) return PARADOX_CSS_LEXER_NO_TOKEN;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_token;
+    }
+
+/*
+    size_t index = tracer->index;
+    size_t num_bytes;
+    
+    // TODO
+    err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+
+    reset_tracer:
+    tracer->index = index;
+*/
+
+    null_token:
+    *token = NULL;
+    return err;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_percentage(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_percentage(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!token) return PARADOX_CSS_LEXER_NO_TOKEN;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_token;
+    }
+
+/*
+    size_t index = tracer->index;
+    size_t num_bytes;
+    
+    // TODO
+    err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+
+    reset_tracer:
+    tracer->index = index;
+*/
+
+    null_token:
+    *token = NULL;
+    return err;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_dimension(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_dimension(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!token) return PARADOX_CSS_LEXER_NO_TOKEN;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_token;
+    }
+
+/*
+    size_t index = tracer->index;
+    size_t num_bytes;
+    
+    // TODO
+    err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+
+    reset_tracer:
+    tracer->index = index;
+*/
+
+    null_token:
+    *token = NULL;
+    return err;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_uri(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_uri(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!token) return PARADOX_CSS_LEXER_NO_TOKEN;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_token;
+    }
+
+/*
+    size_t index = tracer->index;
+    size_t num_bytes;
+    
+    // TODO
+    err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+
+    reset_tracer:
+    tracer->index = index;
+*/
+
+    null_token:
+    *token = NULL;
+    return err;
 }
 
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_unicode_range(paradox_css_tracer* tracer, paradox_css_token** token)
@@ -647,13 +890,57 @@ PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_s(paradox_c
     *token = NULL;
     return err;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_comment(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_comment(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!token) return PARADOX_CSS_LEXER_NO_TOKEN;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_token;
+    }
+
+/*
+    size_t index = tracer->index;
+    size_t num_bytes;
+    
+    // TODO
+    err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+
+    reset_tracer:
+    tracer->index = index;
+*/
+
+    null_token:
+    *token = NULL;
+    return err;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_function(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_function(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!token) return PARADOX_CSS_LEXER_NO_TOKEN;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_token;
+    }
+
+/*
+    size_t index = tracer->index;
+    size_t num_bytes;
+    
+    // TODO
+    err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+
+    reset_tracer:
+    tracer->index = index;
+*/
+
+    null_token:
+    *token = NULL;
+    return err;
 }
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_includes(paradox_css_tracer* tracer, paradox_css_token** token)
 {
@@ -749,34 +1036,253 @@ PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_dash_match(
     *token = NULL;
     return err;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_delim(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_delim(paradox_css_tracer* tracer, paradox_css_token** token)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!token) return PARADOX_CSS_LEXER_NO_TOKEN;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_token;
+    }
+
+ /*
+    size_t num_bytes;
+
+    // TODO
+    err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+*/
+
+    null_token:
+    *token = NULL;
+    return err;
 }
 
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_ident_macro(paradox_css_tracer* tracer)
 {
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    }
+
+    // size_t num_bytes;
+
     return PARADOX_CSS_LEXER_INVALID_CONTENT;
 }
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_name_macro(paradox_css_tracer* tracer)
 {
     return PARADOX_CSS_LEXER_INVALID_CONTENT;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_nmstart_macro(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_nmstart_macro(paradox_css_tracer* tracer, paradox_uint32_t* code)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!code) return PARADOX_CSS_LEXER_NO_UTF8_CODE;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_code;
+    }
+    
+    size_t num_bytes;
+
+    // step 1a: {nonascii} | {escape}
+    if(PARADOX_CSS_LEXER_SUCCESS == paradox_css_consume_escape_macro(tracer, code)
+    || PARADOX_CSS_LEXER_SUCCESS == paradox_css_consume_nonascii_macro(tracer, code))
+        return PARADOX_CSS_LEXER_SUCCESS;
+
+    // step 1b: [_a-z]
+    *code = paradox_css_tracer_peek_code(tracer, &num_bytes);
+    if(!(*code == '_' || ('a' <= *code && *code <= 'z') || ('A' <= *code && *code <= 'Z')))
+    {
+        err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+        goto null_code;
+    }
+    else
+    {
+        paradox_css_tracer_pop(tracer);
+        return PARADOX_CSS_LEXER_SUCCESS;
+    }
+
+    null_code:
+    code = NULL;
+
+    return err;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_nonascii_macro(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_nonascii_macro(paradox_css_tracer* tracer, paradox_uint32_t* code)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!code) return PARADOX_CSS_LEXER_NO_UTF8_CODE;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_code;
+    }
+
+    size_t num_bytes;
+
+    // [^\0-\237]
+    *code = paradox_css_tracer_peek_code(tracer, &num_bytes);
+    if(*code <= 0237)
+    {
+        err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+        goto null_code;
+    }
+    else if(*code == PARADOX_UTF8_ERR_CODE)
+    {
+        err = PARADOX_CSS_LEXER_UNKNOWN_UTF8_CODE;
+        goto null_code;
+    }
+    else
+    {
+        paradox_css_tracer_pop_seq(tracer, num_bytes);
+        return PARADOX_CSS_LEXER_SUCCESS;
+    }
+
+    null_code:
+    code = NULL;
+
+    return err;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_unicode_macro(paradox_css_tracer* tracer)
+
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_unicode_macro(paradox_css_tracer* tracer, paradox_uint32_t* code)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!code) return PARADOX_CSS_LEXER_NO_UTF8_CODE;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_code;
+    }
+
+    size_t index = tracer->index;
+    size_t num_bytes;
+    
+    // 	\\[0-9a-f]{1,6}(\r\n|[ \n\r\t\f])?
+
+    // "\"
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '\\')
+    {
+        err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+        goto null_code;
+    }
+    paradox_css_tracer_pop(tracer);
+
+    // [0-9a-f]{1,6}
+    
+    paradox_str_t  hex_ptr = NULL;
+    size_t         hex_len = 0;
+    for(paradox_int8_t i = 0; i < 6; ++i)
+    {
+        paradox_uint32_t c = paradox_css_tracer_peek_code(tracer, &num_bytes);
+        if(paradox_uchar32_ishex(c))
+        {
+            if(!hex_ptr) hex_ptr = tracer->content + tracer->index;
+            hex_len++;
+            paradox_css_tracer_pop(tracer);
+        }
+        else break;
+    }
+    if(!hex_ptr)
+    {
+        err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+        goto reset_tracer;
+    }
+
+    if(!paradox_hex_to_uint32(hex_ptr, hex_len, code) || !paradox_uchar32_isunicode(*code))
+    {
+        err = PARADOX_CSS_LEXER_UNKNOWN_UTF8_CODE;
+        goto reset_tracer;
+    }
+
+    // (\r\n|[ \n\r\t\f])?
+    switch(paradox_css_tracer_peek_code(tracer, &num_bytes))
+    {
+    case  ' ':
+    case '\t':
+    case '\n':
+    case '\f':
+        paradox_css_tracer_pop(tracer);
+        break;
+
+    case '\r': {
+        paradox_css_tracer_pop(tracer);
+        if(paradox_css_tracer_peek_code(tracer, &num_bytes) == '\n')
+            paradox_css_tracer_pop(tracer);
+        break;
+    }
+    default:
+        break;
+    }
+
+    return PARADOX_CSS_LEXER_SUCCESS;
+
+    reset_tracer:
+    tracer->index = index;
+
+    null_code:
+    code = NULL;
+
+    return err;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_escape_macro(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_escape_macro(paradox_css_tracer* tracer, paradox_uint32_t* code)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!code) return PARADOX_CSS_LEXER_NO_UTF8_CODE;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_code;
+    }
+
+    size_t index = tracer->index;
+    size_t num_bytes;
+
+    // step 1a: {unicode}
+    if(PARADOX_CSS_LEXER_SUCCESS == paradox_css_consume_unicode_macro(tracer, code))
+        return PARADOX_CSS_LEXER_SUCCESS;
+    
+    // step 1b: "\" "[^\n\r\f0-9a-f]"
+
+    // "\"
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '\\')
+    {
+        err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+        goto null_code;
+    }
+    paradox_css_tracer_pop(tracer);
+
+    // "[^\n\r\f0-9a-f]"
+    switch(*code = paradox_css_tracer_peek_code(tracer, &num_bytes))
+    {
+    case '\n':
+    case '\r':
+    case '\f':
+        err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+        goto reset_tracer;
+    
+    default: {
+        if(paradox_uchar32_ishex(*code))
+        {
+            err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+            goto reset_tracer;
+        }
+        else return PARADOX_CSS_LEXER_SUCCESS;
+    }}
+
+    reset_tracer:
+    tracer->index = index;
+
+    null_code:
+    code = NULL;
+
+    return err;
 }
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_nmchar_macro(paradox_css_tracer* tracer)
 {
