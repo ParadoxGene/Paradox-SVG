@@ -1316,17 +1316,83 @@ PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_badstring2_m
 {
     return PARADOX_CSS_LEXER_INVALID_CONTENT;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_badcomment_macro(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_badcomment_macro(paradox_css_tracer* tracer, paradox_str_t comment)
 {
     return PARADOX_CSS_LEXER_INVALID_CONTENT;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_badcomment1_macro(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_badcomment1_macro(paradox_css_tracer* tracer, paradox_str_t comment)
 {
     return PARADOX_CSS_LEXER_INVALID_CONTENT;
 }
-PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_badcomment2_macro(paradox_css_tracer* tracer)
+PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_badcomment2_macro(paradox_css_tracer* tracer, paradox_str_t comment)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!comment) return PARADOX_CSS_LEXER_NO_STRING;
+
+    paradox_css_lexer_errno_t err;
+    if(!tracer)
+    {
+        err = PARADOX_CSS_LEXER_NO_TRACER;
+        goto null_comment;
+    }
+
+    size_t index = tracer->index;
+    size_t num_bytes;
+
+    // "/"
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '/')
+    {
+        err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+        goto null_comment;
+    }
+    paradox_css_tracer_pop(tracer);
+
+    // "*"
+    if(paradox_css_tracer_peek_code(tracer, &num_bytes) != '*')
+    {
+        err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+        goto null_comment;
+    }
+    paradox_css_tracer_pop(tracer);
+
+    paradox_uint32_t code;
+    // [^*]*
+    while((code = paradox_css_tracer_peek_code(tracer, &num_bytes)) != '*')
+    {
+        if(code == PARADOX_UTF8_ERR_CODE)
+        {
+            err = PARADOX_CSS_LEXER_UNKNOWN_UTF8_CODE;
+            goto reset_tracer;
+        }
+        else paradox_css_tracer_pop_seq(tracer, num_bytes);
+    }
+
+    // (\*+[^/*][^*]*)*
+    while((code = paradox_css_tracer_peek_code(tracer, &num_bytes)) == '*')
+    {
+        paradox_css_tracer_pop(tracer);
+        while((code = paradox_css_tracer_peek_code(tracer, &num_bytes)) == '*') paradox_css_tracer_pop(tracer);
+        
+        if((code = paradox_css_tracer_peek_code(tracer, &num_bytes)) == '/')
+        {
+            err = PARADOX_CSS_LEXER_INVALID_CONTENT;
+            goto reset_tracer;
+        }
+        paradox_css_tracer_pop_seq(tracer, num_bytes);
+
+        while((code = paradox_css_tracer_peek_code(tracer, &num_bytes)) != '*') paradox_css_tracer_pop_seq(tracer, num_bytes);
+    }
+
+    // allocate comment string
+
+    return PARADOX_CSS_LEXER_SUCCESS;
+    
+    reset_tracer:
+    tracer->index = index;
+
+    null_comment:
+    comment = NULL;
+
+    return err;
 }
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_baduri_macro(paradox_css_tracer* tracer)
 {
@@ -1346,7 +1412,27 @@ PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_baduri3_macr
 }
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_nl_macro(paradox_css_tracer* tracer)
 {
-    return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    if(!tracer) return PARADOX_CSS_LEXER_NO_TRACER;
+
+    size_t num_bytes;
+
+    // \ n | \ r \ n | \ r | \ f
+    switch(paradox_css_tracer_peek_code(tracer, &num_bytes))
+    {
+    case '\n':
+    case '\f':
+        paradox_css_tracer_pop(tracer);
+        return PARADOX_CSS_LEXER_SUCCESS;
+
+    case '\r': {
+        paradox_css_tracer_pop(tracer);
+        if(paradox_css_tracer_peek_code(tracer, &num_bytes) == '\n')
+            paradox_css_tracer_pop(tracer);
+        return PARADOX_CSS_LEXER_SUCCESS;
+    }
+    default:
+        return PARADOX_CSS_LEXER_INVALID_CONTENT;
+    }
 }
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_w_macro(paradox_css_tracer* tracer)
 {
@@ -1354,7 +1440,7 @@ PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_w_macro(para
  
     size_t num_bytes;
 
-    // [ \t\r\n\f]*
+    // [ \ s \ t \ r \ n \ f ] *
 
     paradox_uint32_t c = paradox_css_tracer_peek_code(tracer, &num_bytes);
     paradox_bool8_t found = PARADOX_FALSE;
