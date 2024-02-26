@@ -36,100 +36,100 @@ typedef enum paradox_css_lexer_errno_t
 
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_file(paradox_cstr_t path);
 
-// Definition: {ident}
+/** Token: {ident} */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_ident(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: \@{ident}
+/** Token: @ {ident} */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_atkeyword(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: {string}
+/** Token: {string} */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_string(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: {badstring}
+/** Token: {badstring} */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_bad_string(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: {baduri}
+/** Token: {baduri} */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_bad_uri(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: {badcomment}
+/** Token: {badcomment} */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_bad_comment(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: #{name}
+/** Token: # {name} */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_hash(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: {num}
+/** Token: {num} */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_number(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: {num}%
+/** Token: {num} % */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_percentage(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: {num}{ident}
+/** Token: {num} {ident} */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_dimension(paradox_css_tracer* tracer, paradox_css_token** token);
 
 /**
- * Definition1: {U}{R}{L}\\({w}{string}{w}\\)
- * Definition2: {U}{R}{L}\\({w}([!#$%&*-\\[\\]-~]|{nonascii}|{escape})*{w}\\)
+ * Token 1: u r l \ ( {w} {string} {w} \ )
+ * Token 2: u r l \ ( {w} ( [ ! # $ % & * - \ [ \ ] - ~ ] | {nonascii} | {escape} ) * {w} \ )
  */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_uri(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// u\\+[0-9a-f?]{1,6}(-[0-9a-f]{1,6})?
+/** Token: u \ + [ 0 - 9 a - f ? ] { 1 , 6 } ( - [ 0 - 9 a - f ] { 1 , 6 } ) ? */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_unicode_range(paradox_css_tracer* tracer, paradox_css_token** token);
 
-/* Definition: <!-- */
+/** Token: < ! - - */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_cdo(paradox_css_tracer* tracer, paradox_css_token** token);
 
-/* Definition: --> */
+/** Token: - - > */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_cdc(paradox_css_tracer* tracer, paradox_css_token** token);
 
-/* Definition: : */
+/** Token: : */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_colon(paradox_css_tracer* tracer, paradox_css_token** token);
 
-/* Definition: ; */
+/** Token: ; */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_semicolon(paradox_css_tracer* tracer, paradox_css_token** token);
 
-/* Definition: \\{ */
+/** Token: \ { */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_open_brace(paradox_css_tracer* tracer, paradox_css_token** token);
 
-/* Definition: \\} */
+/** Token: \ } */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_close_brace(paradox_css_tracer* tracer, paradox_css_token** token);
 
-/* Definition: \\( */
+/** Token: \ ( */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_open_parenthesis(paradox_css_tracer* tracer, paradox_css_token** token);
 
-/* Definition: \\) */
+/** Token: \ ) */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_close_parenthesis(paradox_css_tracer* tracer, paradox_css_token** token);
 
-/* Definition: \\[ */
+/** Token: \ [ */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_open_bracket(paradox_css_tracer* tracer, paradox_css_token** token);
 
-/* Definition: \\] */
+/** Token: \ ] */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_close_bracket(paradox_css_tracer* tracer, paradox_css_token** token);
 
-/* Definition: [ \\t\\r\\n\\f]+ */
+/** Token: [ \ s \ t \ r \ n \ f ] + */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_s(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: \\/\\*[^*]*\\*+([^/*][^*]*\\*+)*\\/
+/** Token: \ / \ * [ ^ * ] * \ * + ( [ ^ / * ] [ ^ * ] * \ * + ) * \ / */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_comment(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: {ident}\\(
+/** Token: {ident} \ ( */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_function(paradox_css_tracer* tracer, paradox_css_token** token);
 
-/* Definition: ~= */
+/** Token: ~ = */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_includes(paradox_css_tracer* tracer, paradox_css_token** token);
 
-/* Definition: |= */
+/** Token: | = */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_dash_match(paradox_css_tracer* tracer, paradox_css_token** token);
 
-// Definition: Any other character not matched by the above rules, and neither a single nor a double quote
+/** Token: Any other character not matched by the above rules, and neither a single nor a double quote */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_tokenize_delim(paradox_css_tracer* tracer, paradox_css_token** token);
 
-/** Macro: [ - ] ? { n m s t a r t } { n m c h a r } * */
+/** Macro: [ - ] ? {nmstart} {nmchar} * */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_ident_macro(paradox_css_tracer* tracer, paradox_str_t* string_val);
 
-/** Macro: { n m c h a r } + */
+/** Macro: {nmchar} + */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_name_macro(paradox_css_tracer* tracer, paradox_str_t* string_val);
 
-/** Macro: [ _ a - z ] | { n o n a s c i i } | { e s c a p e } */
+/** Macro: [ _ a - z ] | {nonascii} | {escape} */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_nmstart_macro(paradox_css_tracer* tracer, paradox_uint32_t* code);
 
 /** Macro: [ ^ \ 0 - \ 2 3 7 ] */
@@ -138,52 +138,52 @@ PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_nonascii_mac
 /** Macro: \ \ [ 0 - 9 a - f ] { 1 , 6 } ( \ r \ n | [ \ s \ n \ r \ t \ f ] ) ? */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_unicode_macro(paradox_css_tracer* tracer, paradox_uint32_t* code);
 
-/** Macro: { u n i c o d e } | \ \ [ ^ \ n \ r \ f 0 - 9 a - f ] */
+/** Macro: {unicode} | \ \ [ ^ \ n \ r \ f 0 - 9 a - f ] */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_escape_macro(paradox_css_tracer* tracer, paradox_uint32_t* code);
 
-/** Macro: [ _ a - z 0 - 9 - ] | { n o n a s c i i } | { e s c a p e } */
+/** Macro: [ _ a - z 0 - 9 - ] | {nonascii} | {escape} */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_nmchar_macro(paradox_css_tracer* tracer, paradox_uint32_t* code);
 
 /** Macro: [ + - ] ? ( [ 0 - 9 ] + | [ 0 - 9 ] * \ . [ 0 - 9 ] + ) ( e [ + - ] ? [ 0 - 9] + ) ? */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_num_macro(paradox_css_tracer* tracer, paradox_float32_t* num);
 
-/** Macro: { s t r i n g 1 } | { s t r i n g 2 } */
+/** Macro: {string1} | {string2} */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_string_macro(paradox_css_tracer* tracer, paradox_str_t* string_val);
 
-/** Macro: \ " ( [ ^ \ n \ r \ f \ \ " ] | \ \ { n l } | { e s c a p e } ) * \ " */
+/** Macro: \ " ( [ ^ \ n \ r \ f \ \ " ] | \ \ {nl} | {escape} ) * \ " */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_string1_macro(paradox_css_tracer* tracer, paradox_str_t* string_val);
 
-/** Macro: \ ' ( [ ^ \ n \ r \ f \ \ ' ] | \ \ { n l } | { e s c a p e } ) * \ ' */
+/** Macro: \ ' ( [ ^ \ n \ r \ f \ \ ' ] | \ \ {nl} | {escape} ) * \ ' */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_string2_macro(paradox_css_tracer* tracer, paradox_str_t* string_val);
 
-/** Macro: { b a d s t r i n g 1 } | { b a d s t r i n g 2 } */
+/** Macro: {badstring1} | {badstring2} */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_badstring_macro(paradox_css_tracer* tracer, paradox_str_t* string_val);
 
-/** Macro: \ " ( [ ^ \ n \ r \ f \ \ " ] | \ \ { n l } | { e s c a p e } ) * \ \ ? */
+/** Macro: \ " ( [ ^ \ n \ r \ f \ \ " ] | \ \ {nl} | {escape} ) * \ \ ? */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_badstring1_macro(paradox_css_tracer* tracer, paradox_str_t* string_val);
 
-/** Macro: \ ' ( [ ^ \ n \ r \ f \ \ ' ] | \ \ { n l } | { e s c a p e } ) * \ \ ? */
+/** Macro: \ ' ( [ ^ \ n \ r \ f \ \ ' ] | \ \ {nl} | {escape} ) * \ \ ? */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_badstring2_macro(paradox_css_tracer* tracer, paradox_str_t* string_val);
 
-/** Macro: { b a d c o m m e n t 1 } | { b a d c o m m e n t 2 } */
+/** Macro: {badcomment1} | {badcomment2} */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_badcomment_macro(paradox_css_tracer* tracer, paradox_str_t* comment);
 
 /** Macro: \ / \ * [ ^ * ] * \ * + ( [ ^ / * ] [ ^ * ] * \ * + ) * */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_badcomment1_macro(paradox_css_tracer* tracer, paradox_str_t* comment);
 
-/** Macro: \ / \ * [^ *] * ( \ *+[^/ * ][^ * ] * ) * */
+/** Macro: \ / \ * [ ^ * ] * ( \ * + [ ^ / * ] [ ^ * ] * ) * */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_badcomment2_macro(paradox_css_tracer* tracer, paradox_str_t* comment);
 
-/** Macro: { b a d u r i 1 } | { b a d u r i 2 } | { b a d u r i 3 } */
+/** Macro: {baduri1} | {baduri2} | {baduri3} */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_baduri_macro(paradox_css_tracer* tracer, paradox_str_t* url);
 
-/** Macro: u r l \ ( { w } ( [ ! # $ % & * - ~ ] | { n o n a s c i i } | { e s c a p e } ) * { w } */
+/** Macro: u r l \ ( {w} ( [ ! # $ % & * - ~ ] | {nonascii} | {escape} ) * {w} */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_baduri1_macro(paradox_css_tracer* tracer, paradox_str_t* url);
 
-/** Macro: u r l \ ( { w } { s t r i n g } { w } */
+/** Macro: u r l \ ( {w} {string} {w} */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_baduri2_macro(paradox_css_tracer* tracer, paradox_str_t* url);
 
-/** Macro: u r l \ ( { w } { b a d s t r i n g } */
+/** Macro: u r l \ ( {w} {badstring} */
 PARADOX_SVG_API const paradox_css_lexer_errno_t paradox_css_consume_baduri3_macro(paradox_css_tracer* tracer, paradox_str_t* url);
 
 /** Macro: \ n | \ r \ n | \ r | \ f */
