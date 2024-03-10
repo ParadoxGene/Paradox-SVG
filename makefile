@@ -1,52 +1,91 @@
-ifeq ($(OS),Windows_NT)
-	OS_NAME_S := Win32
-	ifeq ($(PROCESSOR_ARCHITEW6432),AMD64)
-		OS_NAME_P := AMD64
-	else
-		ifeq ($(PROCESSOR_ARCHITECTURE),AMD64)
-			OS_NAME_P := AMD64
-		endif
-		ifeq ($(PROCESSOR_ARCHITECTURE),x86)
-			OS_NAME_P := IA32
-		endif
-	endif
-else
-	UNAME_S := $(shell uname -s)
-	ifeq ($(UNAME_S),Linux)
-		OS_NAME_S := Linux
-	endif
-	ifeq ($(UNAME_S),Darwin)
-		OS_NAME_S := OSX
-	endif
+include config/make/operating-system.mk
+include config/make/build-commands.mk
+include config/make/common.mk
 
-	UNAME_P := $(shell uname -p)
-	ifeq ($(UNAME_P),x86_64)
-		OS_NAME_P := AMD64
-	endif
-	ifneq ($(filter %86,$(UNAME_P)),)
-		OS_NAME_P := IA32
-	endif
-	ifneq ($(filter arm%,$(UNAME_P)),)
-		OS_NAME_P := ARM
-	endif
+PROJECT_NAME:=paradox-svg
+
+ifeq ($(OS_NAME),Windows)
+all: msvc-release-c msvc-release-cpp;
+else ifeq ($(OS_NAME),Linux)
+all: gcc-release-c gcc-release-cpp;
+else ifeq ($(OS_NAME),Macintosh)
+all: xcode-release-swift;
 endif
 
-all:
-ifeq ($(OS_NAME_S),Win32)
-	cmake -G"Visual Studio 17" -B ./build/paradox-svg -S ./
-	cmake --build ./build/paradox-svg
-else ifeq ($(OS_NAME_S),Linux)
-	cmake -G"Unix Makefiles" -B ./build/paradox-svg -S ./
-	cmake --build ./build/paradox-svg
-else ifeq ($(OS_NAME_S),OSX)
-endif
+define build_project
+@ cmake\
+	--log-level=STATUS\
+	-G $(call get-cmake-generator)\
+	-B "./build/$(call build-compiler-part)-$(call build-lang-part)/${1}/cmake"\
+	-S "./"\
+	-D CMAKE_CXX_COMPILER=$(call get-cmake-cxx-compiler)\
+	-D CMAKE_C_COMPILER=$(call get-cmake-c-compiler)\
+	-D CMAKE_BUILD_TYPE=$(call build-config-part)\
+	-D PARADOX_COMPILER=$(call build-compiler-part)\
+	-D PARADOX_LANGUAGE=$(call build-lang-part)\
+	-D PARADOX_BUILD_C_LIBS=${2}\
+	-D PARADOX_BUILD_CXX_LIBS=${3}\
+	-D PARADOX_BUILD_Swift_LIBS=${4}\
+	-D PARADOX_BUILD_TESTS=${5}\
+	-D PARADOX_BUILD_DOCS=${6}
+@ cmake\
+	--build "./build/$(call build-compiler-part)-$(call build-lang-part)/${1}/cmake" --config $(call get-cmake-config-type)
+endef
 
-build_tests:
-ifeq ($(OS_NAME_S),Win32)
-	cmake -G"Visual Studio 17" -B ./build/paradox-svg -S ./ -DPARADOX_SVG_BUILD_TESTS=ON
-	cmake --build ./build/paradox-svg
-else ifeq ($(OS_NAME_S),Linux)
-	cmake -G"Unix Makefiles" -B ./build/paradox-svg -S ./ -DPARADOX_SVG_BUILD_TESTS=ON
-	cmake --build ./build/paradox-svg
-else ifeq ($(OS_NAME_S),OSX)
-endif
+define build_project_c_libs
+	$(call build_project,${1},ON,OFF,OFF,OFF,OFF)
+endef
+
+define build_project_cpp_libs
+	$(call build_project,${1},OFF,ON,OFF,OFF,OFF)
+endef
+
+define build_project_swift_libs
+	$(call build_project,${1},OFF,OFF,ON,OFF,OFF)
+endef
+
+define build_project_tests
+	$(call build_project,${1},OFF,OFF,OFF,ON,OFF)
+endef
+
+define build_project_docs
+	$(call build_project,${1},OFF,OFF,OFF,OFF,ON)
+endef
+
+%-c: %-c-lib %-c-tests %-c-docs;
+%-cpp: %-cpp-lib %-cpp-tests %-cpp-docs;
+%-swift: %-swift-lib %-swift-tests %-swift-docs;
+
+%-c-lib:
+	@ echo ---$(PROJECT_NAME): building c libraries---
+	$(call build_project_c_libs,$(PROJECT_NAME))
+	@ echo ---$(PROJECT_NAME): c libraries are ready---
+	$(call newline)
+	$(call newline)
+
+%-cpp-lib:
+	@ echo ---$(PROJECT_NAME): building c++ libraries---
+	$(call build_project_cpp_libs,$(PROJECT_NAME))
+	@ echo ---$(PROJECT_NAME): c++ libraries are ready---
+	$(call newline)
+	$(call newline)
+
+%-swift-lib:
+	@ echo ---$(PROJECT_NAME): building swift libraries---
+	$(call build_project_swift_libs,$(PROJECT_NAME))
+	@ echo ---$(PROJECT_NAME): swift libraries are ready---
+	$(call newline)
+	$(call newline)
+
+%-tests: %-lib
+	@ echo ---$(PROJECT_NAME): building tests---
+	$(call build_project_tests,$(PROJECT_NAME))
+	@ echo ---$(PROJECT_NAME): tests are ready---
+	$(call newline)
+	$(call newline)
+%-docs:
+	@ echo ---$(PROJECT_NAME): building documentation---
+	$(call build_project_docs,$(PROJECT_NAME))
+	@ echo ---$(PROJECT_NAME): documentation is ready---
+	$(call newline)
+	$(call newline)
