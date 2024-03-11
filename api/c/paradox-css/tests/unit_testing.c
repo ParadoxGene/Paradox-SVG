@@ -53,19 +53,19 @@ void test_paradox_css_tokenize_unicode_range(void)
 
         paradox_css_lexer_errno_t err = paradox_css_tokenize_unicode_range(tracer, &token);
         switch(err) {
-        case PARADOX_CSS_LEXER_INVALID_CONTENT: {
+        case PARADOX_CSS_LEXER_BAD_CONTENT: {
             err_found = PARADOX_TRUE;
             sprintf(err_buf, "css lexer failed: invalid content while tokenizing \"%s\"", content);
             TEST_MESSAGE(err_buf);
             break;
         }
-        case PARADOX_CSS_LEXER_TOKEN_ALLOC_FAILURE: {
+        case PARADOX_CSS_LEXER_BAD_ALLOC: {
             err_found = PARADOX_TRUE;
             sprintf(err_buf, "css lexer failed: could not allocate a token while tokenizing \"%s\"", content);
             TEST_MESSAGE(err_buf);
             break;
         }
-        case PARADOX_CSS_LEXER_SUCCESS: {
+        case PARADOX_CSS_LEXER_OK: {
             if(tracer->index != tracer->length)
             {
                 err_found = PARADOX_TRUE;
@@ -134,19 +134,19 @@ void test_paradox_css_tokenize_cdo(void)
     paradox_css_tracer_load_str(tracer, content);
     paradox_css_lexer_errno_t err = paradox_css_tokenize_cdo(tracer, &token);
     switch(err) {
-    case PARADOX_CSS_LEXER_INVALID_CONTENT: {
+    case PARADOX_CSS_LEXER_BAD_CONTENT: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: invalid content while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_TOKEN_ALLOC_FAILURE: {
+    case PARADOX_CSS_LEXER_BAD_ALLOC: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: could not allocate a token while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_SUCCESS: {
+    case PARADOX_CSS_LEXER_OK: {
         if(tracer->index != tracer->length)
         {
             err_found = PARADOX_TRUE;
@@ -186,19 +186,19 @@ void test_paradox_css_tokenize_cdc(void)
     paradox_css_tracer_load_str(tracer, content);
     paradox_css_lexer_errno_t err = paradox_css_tokenize_cdc(tracer, &token);
     switch(err) {
-    case PARADOX_CSS_LEXER_INVALID_CONTENT: {
+    case PARADOX_CSS_LEXER_BAD_CONTENT: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: invalid content while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_TOKEN_ALLOC_FAILURE: {
+    case PARADOX_CSS_LEXER_BAD_ALLOC: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: could not allocate a token while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_SUCCESS: {
+    case PARADOX_CSS_LEXER_OK: {
         if(tracer->index != tracer->length)
         {
             err_found = PARADOX_TRUE;
@@ -238,19 +238,19 @@ void test_paradox_css_tokenize_colon(void)
     paradox_css_tracer_load_str(tracer, content);
     paradox_css_lexer_errno_t err = paradox_css_tokenize_colon(tracer, &token);
     switch(err) {
-    case PARADOX_CSS_LEXER_INVALID_CONTENT: {
+    case PARADOX_CSS_LEXER_BAD_CONTENT: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: invalid content while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_TOKEN_ALLOC_FAILURE: {
+    case PARADOX_CSS_LEXER_BAD_ALLOC: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: could not allocate a token while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_SUCCESS: {
+    case PARADOX_CSS_LEXER_OK: {
         if(tracer->index != tracer->length)
         {
             err_found = PARADOX_TRUE;
@@ -290,19 +290,19 @@ void test_paradox_css_tokenize_semicolon(void)
     paradox_css_tracer_load_str(tracer, content);
     paradox_css_lexer_errno_t err = paradox_css_tokenize_semicolon(tracer, &token);
     switch(err) {
-    case PARADOX_CSS_LEXER_INVALID_CONTENT: {
+    case PARADOX_CSS_LEXER_BAD_CONTENT: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: invalid content while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_TOKEN_ALLOC_FAILURE: {
+    case PARADOX_CSS_LEXER_BAD_ALLOC: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: could not allocate a token while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_SUCCESS: {
+    case PARADOX_CSS_LEXER_OK: {
         if(tracer->index != tracer->length)
         {
             err_found = PARADOX_TRUE;
@@ -342,19 +342,19 @@ void test_paradox_css_tokenize_open_brace(void)
     paradox_css_tracer_load_str(tracer, content);
     paradox_css_lexer_errno_t err = paradox_css_tokenize_open_brace(tracer, &token);
     switch(err) {
-    case PARADOX_CSS_LEXER_INVALID_CONTENT: {
+    case PARADOX_CSS_LEXER_BAD_CONTENT: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: invalid content while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_TOKEN_ALLOC_FAILURE: {
+    case PARADOX_CSS_LEXER_BAD_ALLOC: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: could not allocate a token while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_SUCCESS: {
+    case PARADOX_CSS_LEXER_OK: {
         if(tracer->index != tracer->length)
         {
             err_found = PARADOX_TRUE;
@@ -394,19 +394,19 @@ void test_paradox_css_tokenize_close_brace(void)
     paradox_css_tracer_load_str(tracer, content);
     paradox_css_lexer_errno_t err = paradox_css_tokenize_close_brace(tracer, &token);
     switch(err) {
-    case PARADOX_CSS_LEXER_INVALID_CONTENT: {
+    case PARADOX_CSS_LEXER_BAD_CONTENT: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: invalid content while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_TOKEN_ALLOC_FAILURE: {
+    case PARADOX_CSS_LEXER_BAD_ALLOC: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: could not allocate a token while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_SUCCESS: {
+    case PARADOX_CSS_LEXER_OK: {
         if(tracer->index != tracer->length)
         {
             err_found = PARADOX_TRUE;
@@ -446,19 +446,19 @@ void test_paradox_css_tokenize_open_parenthesis(void)
     paradox_css_tracer_load_str(tracer, content);
     paradox_css_lexer_errno_t err = paradox_css_tokenize_open_parenthesis(tracer, &token);
     switch(err) {
-    case PARADOX_CSS_LEXER_INVALID_CONTENT: {
+    case PARADOX_CSS_LEXER_BAD_CONTENT: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: invalid content while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_TOKEN_ALLOC_FAILURE: {
+    case PARADOX_CSS_LEXER_BAD_ALLOC: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: could not allocate a token while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_SUCCESS: {
+    case PARADOX_CSS_LEXER_OK: {
         if(tracer->index != tracer->length)
         {
             err_found = PARADOX_TRUE;
@@ -498,19 +498,19 @@ void test_paradox_css_tokenize_close_parenthesis(void)
     paradox_css_tracer_load_str(tracer, content);
     paradox_css_lexer_errno_t err = paradox_css_tokenize_close_parenthesis(tracer, &token);
     switch(err) {
-    case PARADOX_CSS_LEXER_INVALID_CONTENT: {
+    case PARADOX_CSS_LEXER_BAD_CONTENT: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: invalid content while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_TOKEN_ALLOC_FAILURE: {
+    case PARADOX_CSS_LEXER_BAD_ALLOC: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: could not allocate a token while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_SUCCESS: {
+    case PARADOX_CSS_LEXER_OK: {
         if(tracer->index != tracer->length)
         {
             err_found = PARADOX_TRUE;
@@ -550,19 +550,19 @@ void test_paradox_css_tokenize_open_bracket(void)
     paradox_css_tracer_load_str(tracer, content);
     paradox_css_lexer_errno_t err = paradox_css_tokenize_open_bracket(tracer, &token);
     switch(err) {
-    case PARADOX_CSS_LEXER_INVALID_CONTENT: {
+    case PARADOX_CSS_LEXER_BAD_CONTENT: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: invalid content while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_TOKEN_ALLOC_FAILURE: {
+    case PARADOX_CSS_LEXER_BAD_ALLOC: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: could not allocate a token while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_SUCCESS: {
+    case PARADOX_CSS_LEXER_OK: {
         if(tracer->index != tracer->length)
         {
             err_found = PARADOX_TRUE;
@@ -602,19 +602,19 @@ void test_paradox_css_tokenize_close_bracket(void)
     paradox_css_tracer_load_str(tracer, content);
     paradox_css_lexer_errno_t err = paradox_css_tokenize_close_bracket(tracer, &token);
     switch(err) {
-    case PARADOX_CSS_LEXER_INVALID_CONTENT: {
+    case PARADOX_CSS_LEXER_BAD_CONTENT: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: invalid content while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_TOKEN_ALLOC_FAILURE: {
+    case PARADOX_CSS_LEXER_BAD_ALLOC: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: could not allocate a token while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_SUCCESS: {
+    case PARADOX_CSS_LEXER_OK: {
         if(tracer->index != tracer->length)
         {
             err_found = PARADOX_TRUE;
@@ -654,19 +654,19 @@ void test_paradox_css_tokenize_includes(void)
     paradox_css_tracer_load_str(tracer, content);
     paradox_css_lexer_errno_t err = paradox_css_tokenize_includes(tracer, &token);
     switch(err) {
-    case PARADOX_CSS_LEXER_INVALID_CONTENT: {
+    case PARADOX_CSS_LEXER_BAD_CONTENT: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: invalid content while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_TOKEN_ALLOC_FAILURE: {
+    case PARADOX_CSS_LEXER_BAD_ALLOC: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: could not allocate a token while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_SUCCESS: {
+    case PARADOX_CSS_LEXER_OK: {
         if(tracer->index != tracer->length)
         {
             err_found = PARADOX_TRUE;
@@ -706,19 +706,19 @@ void test_paradox_css_tokenize_dash_match(void)
     paradox_css_tracer_load_str(tracer, content);
     paradox_css_lexer_errno_t err = paradox_css_tokenize_dash_match(tracer, &token);
     switch(err) {
-    case PARADOX_CSS_LEXER_INVALID_CONTENT: {
+    case PARADOX_CSS_LEXER_BAD_CONTENT: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: invalid content while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_TOKEN_ALLOC_FAILURE: {
+    case PARADOX_CSS_LEXER_BAD_ALLOC: {
         err_found = PARADOX_TRUE;
         sprintf(err_buf, "css lexer failed: could not allocate a token while tokenizing \"%s\"", content);
         TEST_MESSAGE(err_buf);
         break;
     }
-    case PARADOX_CSS_LEXER_SUCCESS: {
+    case PARADOX_CSS_LEXER_OK: {
         if(tracer->index != tracer->length)
         {
             err_found = PARADOX_TRUE;

@@ -7,31 +7,19 @@
 typedef enum paradox_css_lexer_errno_t
 {
     /** Lexer successfully tokenized a step. */
-    PARADOX_CSS_LEXER_SUCCESS,
+    PARADOX_CSS_LEXER_OK,
 
-    /** Lexer function was not passed a tracer reference. */
-    PARADOX_CSS_LEXER_NO_TRACER,
+    /** Lexer function was not passed a reference. */
+    PARADOX_CSS_LEXER_BAD_PTR,
 
-    /** Lexer function was not passed a token reference. */
-    PARADOX_CSS_LEXER_NO_TOKEN,
+    /** Lexer function failed to allocate. */
+    PARADOX_CSS_LEXER_BAD_ALLOC,
 
     /** String content of the tracer is invalid for the lexer function. */
-    PARADOX_CSS_LEXER_INVALID_CONTENT,
-
-    /** Lexer function failed to allocate the token. */
-    PARADOX_CSS_LEXER_TOKEN_ALLOC_FAILURE,
-
-    /** Lexer function was not passed a string (paradox_str_t) reference. */
-    PARADOX_CSS_LEXER_NO_STRING,
-
-    /** Lexer function was not passed a number (paradox_float32_t) reference. */
-    PARADOX_CSS_LEXER_NO_NUMBER,
-
-    /** Lexer function was not passed a utf8 code (paradox_uint32_t) reference. */
-    PARADOX_CSS_LEXER_NO_UTF8_CODE,
+    PARADOX_CSS_LEXER_BAD_CONTENT,
 
     /** String content of the tracer contained an invalid utf8 character sequence. */
-    PARADOX_CSS_LEXER_UNKNOWN_UTF8_CODE,
+    PARADOX_CSS_LEXER_BAD_UTF8_CODE,
 } paradox_css_lexer_errno_t;
 
 PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_file(paradox_cstr_t path);
