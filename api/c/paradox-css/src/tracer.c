@@ -1,5 +1,5 @@
 #include <paradox-css/tracer.h>
-#include <paradox-platform/char.h>
+#include <paradox-platform/characters.h>
 #include <stdlib.h>
 #include <string.h>
 

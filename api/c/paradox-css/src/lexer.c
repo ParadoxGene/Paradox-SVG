@@ -1,14 +1,14 @@
 #include <paradox-css/lexer.h>
-#include <paradox-platform/io.h>
-#include <paradox-platform/char.h>
-#include <paradox-platform/conv.h>
+#include <paradox-platform/console.h>
+#include <paradox-platform/characters.h>
+#include <paradox-platform/numerics.h>
 #include <string.h>
 #include <stdlib.h>
 
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_string_macro_helper(paradox_css_tracer* tracer, const paradox_char8_t quote);
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_badstring_macro_helper(paradox_css_tracer* tracer, const paradox_char8_t quote);
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_string_macro_helper(paradox_css_tracer* tracer, const paradox_char8_t quote);
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_badstring_macro_helper(paradox_css_tracer* tracer, const paradox_char8_t quote);
 
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_file(paradox_cstr_t path)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_file(paradox_cstr_t path)
 {
     FILE* file = paradox_bin_dir_fopen(path, "r");
     paradox_css_tracer* tracer = paradox_css_create_tracer();
@@ -53,7 +53,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_file(parado
     paradox_css_destroy_tracer(tracer);
     return PARADOX_CSS_LEXER_BAD_CONTENT;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_ident(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_ident(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -83,7 +83,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_ident(parad
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_atkeyword(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_atkeyword(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -119,7 +119,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_atkeyword(p
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_string(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_string(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -149,7 +149,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_string(para
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_bad_string(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_bad_string(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -179,7 +179,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_bad_string(
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_bad_uri(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_bad_uri(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -209,7 +209,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_bad_uri(par
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_bad_comment(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_bad_comment(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -239,7 +239,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_bad_comment
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_hash(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_hash(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -275,7 +275,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_hash(parado
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_number(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_number(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -305,7 +305,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_number(para
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_percentage(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_percentage(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -341,7 +341,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_percentage(
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_dimension(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_dimension(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -377,7 +377,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_dimension(p
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_uri(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_uri(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -404,7 +404,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_uri(paradox
     return err;
 }
 
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_unicode_range(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_unicode_range(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -507,7 +507,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_unicode_ran
     return err;
 }
 
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_cdo(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_cdo(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -570,7 +570,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_cdo(paradox
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_cdc(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_cdc(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -625,7 +625,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_cdc(paradox
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_colon(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_colon(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -660,7 +660,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_colon(parad
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_semicolon(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_semicolon(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -695,7 +695,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_semicolon(p
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_open_brace(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_open_brace(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -730,7 +730,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_open_brace(
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_close_brace(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_close_brace(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -765,7 +765,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_close_brace
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_open_parenthesis(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_open_parenthesis(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -800,7 +800,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_open_parent
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_close_parenthesis(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_close_parenthesis(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -830,7 +830,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_close_paren
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_open_bracket(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_open_bracket(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -865,7 +865,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_open_bracke
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_close_bracket(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_close_bracket(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -900,7 +900,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_close_brack
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_s(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_s(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -959,7 +959,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_s(paradox_c
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_comment(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_comment(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -1064,7 +1064,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_comment(par
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_function(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_function(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -1104,7 +1104,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_function(pa
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_includes(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_includes(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -1151,7 +1151,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_includes(pa
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_dash_match(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_dash_match(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -1198,7 +1198,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_dash_match(
     *token = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_delim(paradox_css_tracer* tracer, paradox_css_token** token)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_tokenize_delim(paradox_css_tracer* tracer, paradox_css_token** token)
 {
     if(!token) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -1221,7 +1221,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_tokenize_delim(parad
     return err;
 }
 
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_ident_macro(paradox_css_tracer* tracer, paradox_str_t* string_val)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_ident_macro(paradox_css_tracer* tracer, paradox_str_t* string_val)
 {
     if(!string_val) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -1263,7 +1263,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_ident_macro(
     *string_val = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_name_macro(paradox_css_tracer* tracer, paradox_str_t* string_val)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_name_macro(paradox_css_tracer* tracer, paradox_str_t* string_val)
 {
     if(!string_val) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -1311,7 +1311,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_name_macro(p
     *string_val = NULL;
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_nmstart_macro(paradox_css_tracer* tracer, paradox_uint32_t* code)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_nmstart_macro(paradox_css_tracer* tracer, paradox_uint32_t* code)
 {
     if(!code) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -1347,7 +1347,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_nmstart_macr
 
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_nonascii_macro(paradox_css_tracer* tracer, paradox_uint32_t* code)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_nonascii_macro(paradox_css_tracer* tracer, paradox_uint32_t* code)
 {
     if(!code) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -1384,7 +1384,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_nonascii_mac
     return err;
 }
 
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_unicode_macro(paradox_css_tracer* tracer, paradox_uint32_t* code)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_unicode_macro(paradox_css_tracer* tracer, paradox_uint32_t* code)
 {
     if(!code) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -1465,7 +1465,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_unicode_macr
 
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_escape_macro(paradox_css_tracer* tracer, paradox_uint32_t* code)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_escape_macro(paradox_css_tracer* tracer, paradox_uint32_t* code)
 {
     if(!code) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -1519,7 +1519,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_escape_macro
 
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_nmchar_macro(paradox_css_tracer* tracer, paradox_uint32_t* code)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_nmchar_macro(paradox_css_tracer* tracer, paradox_uint32_t* code)
 {
     if(!code) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -1555,7 +1555,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_nmchar_macro
 
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_num_macro(paradox_css_tracer* tracer, paradox_float32_t* num)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_num_macro(paradox_css_tracer* tracer, paradox_float32_t* num)
 {
     if(!num) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -1628,7 +1628,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_num_macro(pa
 
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_string_macro(paradox_css_tracer* tracer, paradox_str_t* string_val)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_string_macro(paradox_css_tracer* tracer, paradox_str_t* string_val)
 {
     if(PARADOX_CSS_LEXER_OK == paradox_css_consume_string1_macro(tracer, string_val)
     || PARADOX_CSS_LEXER_OK == paradox_css_consume_string2_macro(tracer, string_val))
@@ -1636,7 +1636,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_string_macro
     else
         return PARADOX_CSS_LEXER_BAD_CONTENT;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_string1_macro(paradox_css_tracer* tracer, paradox_str_t* string_val)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_string1_macro(paradox_css_tracer* tracer, paradox_str_t* string_val)
 {
     if(!string_val) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -1670,7 +1670,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_string1_macr
 
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_string2_macro(paradox_css_tracer* tracer, paradox_str_t* string_val)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_string2_macro(paradox_css_tracer* tracer, paradox_str_t* string_val)
 {
     if(!string_val) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -1708,7 +1708,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_string2_macr
  * \ " ( [ ^ \ n \ r \ f \ \ " ] | \ \ { n l } | { e s c a p e } ) * \ "
  * or
  * \ ' ( [ ^ \ n \ r \ f \ \ ' ] | \ \ { n l } | { e s c a p e } ) * \ ' */
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_string_macro_helper(paradox_css_tracer* tracer, const paradox_char8_t quote)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_string_macro_helper(paradox_css_tracer* tracer, const paradox_char8_t quote)
 {
     size_t num_bytes;
     paradox_uint32_t code;
@@ -1770,7 +1770,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_string_macro
 
     return PARADOX_CSS_LEXER_OK;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_badstring_macro(paradox_css_tracer* tracer, paradox_str_t* string_val)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_badstring_macro(paradox_css_tracer* tracer, paradox_str_t* string_val)
 {
     if(PARADOX_CSS_LEXER_OK == paradox_css_consume_badstring1_macro(tracer, string_val)
     || PARADOX_CSS_LEXER_OK == paradox_css_consume_badstring2_macro(tracer, string_val))
@@ -1778,7 +1778,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_badstring_ma
     else
         return PARADOX_CSS_LEXER_BAD_CONTENT;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_badstring1_macro(paradox_css_tracer* tracer, paradox_str_t* string_val)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_badstring1_macro(paradox_css_tracer* tracer, paradox_str_t* string_val)
 {
     if(!string_val) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -1812,7 +1812,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_badstring1_m
 
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_badstring2_macro(paradox_css_tracer* tracer, paradox_str_t* string_val)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_badstring2_macro(paradox_css_tracer* tracer, paradox_str_t* string_val)
 {
     if(!string_val) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -1851,7 +1851,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_badstring2_m
  * \ " ( [ ^ \ n \ r \ f \ \ " ] | \ \ { n l } | { e s c a p e } ) * \ \ ?
  * or
  * \ ' ( [ ^ \ n \ r \ f \ \ ' ] | \ \ { n l } | { e s c a p e } ) * \ \ ? */
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_badstring_macro_helper(paradox_css_tracer* tracer, const paradox_char8_t quote)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_badstring_macro_helper(paradox_css_tracer* tracer, const paradox_char8_t quote)
 {
     size_t num_bytes;
     paradox_uint32_t code;
@@ -1910,7 +1910,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_badstring_ma
     return PARADOX_CSS_LEXER_OK;
 }
 
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_badcomment_macro(paradox_css_tracer* tracer, paradox_str_t* comment)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_badcomment_macro(paradox_css_tracer* tracer, paradox_str_t* comment)
 {
     if(PARADOX_CSS_LEXER_OK == paradox_css_consume_badcomment1_macro(tracer, comment)
     || PARADOX_CSS_LEXER_OK == paradox_css_consume_badcomment2_macro(tracer, comment))
@@ -1918,7 +1918,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_badcomment_m
     else
         return PARADOX_CSS_LEXER_BAD_CONTENT;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_badcomment1_macro(paradox_css_tracer* tracer, paradox_str_t* comment)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_badcomment1_macro(paradox_css_tracer* tracer, paradox_str_t* comment)
 {
     if(!comment) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -2018,7 +2018,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_badcomment1_
 
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_badcomment2_macro(paradox_css_tracer* tracer, paradox_str_t* comment)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_badcomment2_macro(paradox_css_tracer* tracer, paradox_str_t* comment)
 {
     if(!comment) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -2093,7 +2093,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_badcomment2_
 
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_baduri_macro(paradox_css_tracer* tracer, paradox_str_t* url)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_baduri_macro(paradox_css_tracer* tracer, paradox_str_t* url)
 {
     if(PARADOX_CSS_LEXER_OK == paradox_css_consume_baduri1_macro(tracer, url)
     || PARADOX_CSS_LEXER_OK == paradox_css_consume_baduri2_macro(tracer, url)
@@ -2102,7 +2102,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_baduri_macro
     else
         return PARADOX_CSS_LEXER_BAD_CONTENT;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_baduri1_macro(paradox_css_tracer* tracer, paradox_str_t* url)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_baduri1_macro(paradox_css_tracer* tracer, paradox_str_t* url)
 {
     if(!url) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -2204,7 +2204,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_baduri1_macr
 
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_baduri2_macro(paradox_css_tracer* tracer, paradox_str_t* url)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_baduri2_macro(paradox_css_tracer* tracer, paradox_str_t* url)
 {
     if(!url) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -2284,7 +2284,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_baduri2_macr
 
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_baduri3_macro(paradox_css_tracer* tracer, paradox_str_t* url)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_baduri3_macro(paradox_css_tracer* tracer, paradox_str_t* url)
 {
     if(!url) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -2360,7 +2360,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_baduri3_macr
 
     return err;
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_nl_macro(paradox_css_tracer* tracer)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_nl_macro(paradox_css_tracer* tracer)
 {
     if(!tracer) return PARADOX_CSS_LEXER_BAD_PTR;
 
@@ -2384,7 +2384,7 @@ PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_nl_macro(par
         return PARADOX_CSS_LEXER_BAD_CONTENT;
     }
 }
-PARADOX_CSS_API const paradox_css_lexer_errno_t paradox_css_consume_w_macro(paradox_css_tracer* tracer)
+PARADOX_CSS_API paradox_css_lexer_errno_t paradox_css_consume_w_macro(paradox_css_tracer* tracer)
 {
     if(!tracer) return PARADOX_CSS_LEXER_BAD_PTR;
  

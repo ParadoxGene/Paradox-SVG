@@ -1,5 +1,5 @@
 #include <paradox-xml/parser.h>
-#include <paradox-platform/io.h>
+#include <paradox-platform/console.h>
 
 PARADOX_XML_API const paradox_errno_t paradox_xml_parse_file(paradox_cstr_t path)
 {
